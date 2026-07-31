@@ -1,0 +1,68 @@
+{
+  "formVersion": "kyc-consent-v1.1",
+  "description": "Permission record model for Uyum privacy consents and audit log fields.",
+  "consentTypes": [
+    {
+      "id": "privacy_notice_ack",
+      "label": "Privacy notice acknowledged",
+      "required": true
+    },
+    {
+      "id": "explicit_consent",
+      "label": "Explicit processing consent",
+      "required": true
+    },
+    {
+      "id": "data_retention",
+      "label": "Data retention permission",
+      "required": true
+    },
+    {
+      "id": "customer_declaration",
+      "label": "Customer declaration",
+      "required": true
+    }
+  ],
+  "permissionRecord": {
+    "id": "string",
+    "customerId": "string",
+    "consentType": "privacy_notice_ack | explicit_consent | data_retention | customer_declaration",
+    "accepted": "boolean",
+    "timestamp": "ISO-8601",
+    "user": {
+      "id": "string",
+      "name": "string",
+      "role": "owner | accountant | employee | unauthorized"
+    },
+    "ipAddress": "string",
+    "device": {
+      "userAgent": "string",
+      "platform": "string",
+      "language": "string",
+      "screen": "string"
+    },
+    "formVersion": "string",
+    "storeId": "string"
+  },
+  "auditLogFields": [
+    "id",
+    "event",
+    "timestamp",
+    "actorUserId",
+    "actorName",
+    "actorRole",
+    "customerId",
+    "consentType",
+    "ipAddress",
+    "deviceSummary",
+    "formVersion",
+    "detail"
+  ],
+  "roles": {
+    "owner": { "piiAccess": "full", "canViewConsentAudit": true },
+    "accountant": { "piiAccess": "full", "canViewConsentAudit": true },
+    "employee": { "piiAccess": "masked", "canViewConsentAudit": true },
+    "unauthorized": { "piiAccess": "hidden", "canViewConsentAudit": false }
+  },
+  "maskedFields": ["nationalId", "phone", "email", "address"]
+}

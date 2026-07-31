@@ -1,0 +1,134 @@
+{
+  "store": {
+    "name": "Uyum Kuyumculuk — Kadıköy",
+    "employee": "Zeynep Arslan",
+    "role": "Store employee",
+    "date": "2026-07-31",
+    "dateLabel": "Friday, 31 July 2026"
+  },
+  "marketPrices": {
+    "status": "placeholder",
+    "updatedLabel": "Live feed placeholder — connect provider",
+    "items": [
+      { "symbol": "XAU/TRY", "label": "Gold (gram)", "value": "3,842.50", "unit": "TRY", "change": "+0.6%", "direction": "up" },
+      { "symbol": "XAU/USD", "label": "Gold (oz)", "value": "2,418.20", "unit": "USD", "change": "+0.4%", "direction": "up" },
+      { "symbol": "USD/TRY", "label": "USD", "value": "33.12", "unit": "TRY", "change": "-0.1%", "direction": "down" },
+      { "symbol": "EUR/TRY", "label": "EUR", "value": "35.84", "unit": "TRY", "change": "+0.2%", "direction": "up" }
+    ]
+  },
+  "summary": {
+    "dailyTransactions": {
+      "count": 18,
+      "label": "Daily transactions",
+      "detail": "12 sales · 4 payments · 2 refunds",
+      "tone": "info"
+    },
+    "missingKyc": {
+      "count": 5,
+      "label": "Missing AML/KYC forms",
+      "detail": "3 walk-ins · 2 threshold reviews",
+      "tone": "warning"
+    },
+    "paymentsAwaitingInvoice": {
+      "count": 4,
+      "label": "Payments waiting for invoice",
+      "detail": "TRY 412,300 total open",
+      "tone": "warning"
+    },
+    "auditReadyFiles": {
+      "count": 27,
+      "label": "Audit-ready files",
+      "detail": "Linked docs ready to export",
+      "tone": "success"
+    }
+  },
+  "quickActions": [
+    { "id": "new-customer", "label": "New Customer", "variant": "primary", "href": "#action-new-customer" },
+    { "id": "start-kyc", "label": "Start KYC Form", "variant": "secondary", "href": "#action-start-kyc" },
+    { "id": "add-payment", "label": "Add Payment", "variant": "secondary", "href": "#action-add-payment" },
+    { "id": "issue-invoice", "label": "Issue Invoice", "variant": "secondary", "href": "#action-issue-invoice" },
+    { "id": "search-archive", "label": "Search Archive", "variant": "ghost", "href": "#action-search-archive" }
+  ],
+  "recentCustomers": [
+    {
+      "id": "CUS-10482",
+      "name": "Ayşe Yılmaz",
+      "lastSeen": "10:42",
+      "purchase": "TRY 248,500",
+      "kycStatus": "In review",
+      "kycTone": "warning",
+      "invoiceStatus": "Queued",
+      "invoiceTone": "warning"
+    },
+    {
+      "id": "CUS-10471",
+      "name": "Golden Gate Ltd.",
+      "lastSeen": "09:55",
+      "purchase": "TRY 92,150",
+      "kycStatus": "Cleared",
+      "kycTone": "success",
+      "invoiceStatus": "Accepted",
+      "invoiceTone": "success"
+    },
+    {
+      "id": "CUS-10460",
+      "name": "Mehmet Kaya",
+      "lastSeen": "09:18",
+      "purchase": "TRY 41,000",
+      "kycStatus": "Cleared",
+      "kycTone": "success",
+      "invoiceStatus": "Rejected",
+      "invoiceTone": "danger"
+    },
+    {
+      "id": "CUS-10455",
+      "name": "Elif Demir",
+      "lastSeen": "08:47",
+      "purchase": "TRY 18,750",
+      "kycStatus": "Missing form",
+      "kycTone": "danger",
+      "invoiceStatus": "Draft",
+      "invoiceTone": "neutral"
+    },
+    {
+      "id": "CUS-10440",
+      "name": "Burak Şahin",
+      "lastSeen": "Yesterday",
+      "purchase": "TRY 126,000",
+      "kycStatus": "Cleared",
+      "kycTone": "success",
+      "invoiceStatus": "Accepted",
+      "invoiceTone": "success"
+    }
+  ],
+  "attentionQueue": [
+    {
+      "id": "ATT-01",
+      "title": "Ayşe Yılmaz — enhanced KYC required",
+      "meta": "Threshold exceeded · opened 10:42",
+      "status": "In review",
+      "tone": "warning"
+    },
+    {
+      "id": "ATT-02",
+      "title": "INV-2026-01460 — tax ID mismatch",
+      "meta": "Mehmet Kaya · e-Invoice rejected",
+      "status": "Rejected",
+      "tone": "danger"
+    },
+    {
+      "id": "ATT-03",
+      "title": "PAY-88290 — payment without invoice",
+      "meta": "Elif Demir · TRY 18,750",
+      "status": "Pending",
+      "tone": "warning"
+    },
+    {
+      "id": "ATT-04",
+      "title": "Walk-in customer — no KYC form",
+      "meta": "Counter 2 · waiting since 11:05",
+      "status": "Missing",
+      "tone": "danger"
+    }
+  ]
+}

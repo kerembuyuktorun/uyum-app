@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uyum — Record Payment</title>
+    <link rel="stylesheet" href="../design-system/tokens.css" />
+    <link rel="stylesheet" href="../design-system/base.css" />
+    <link rel="stylesheet" href="../design-system/layout.css" />
+    <link rel="stylesheet" href="../design-system/components.css" />
+    <link rel="stylesheet" href="./css/dashboard.css" />
+    <link rel="stylesheet" href="./css/kyc.css" />
+    <link rel="stylesheet" href="./css/payments.css" />
+  </head>
+  <body>
+    <div class="app-shell" id="shell">
+      <div class="nav-backdrop" id="nav-backdrop"></div>
+      <aside class="sidebar" aria-label="Primary">
+        <a class="sidebar__brand" href="./index.html">
+          <span class="sidebar__brand-name">Uy<span>um</span></span>
+          <span class="sidebar__brand-tag">Operations</span>
+        </a>
+        <nav class="sidebar__nav">
+          <a class="nav-item" href="./index.html"><span class="nav-item__icon">▣</span><span class="nav-item__label">Dashboard</span></a>
+          <a class="nav-item" href="./kyc.html"><span class="nav-item__icon">◎</span><span class="nav-item__label">Customers</span></a>
+          <a class="nav-item" href="./kyc.html"><span class="nav-item__icon">✓</span><span class="nav-item__label">Compliance</span></a>
+          <a class="nav-item is-active" href="./payments.html"><span class="nav-item__icon">⇄</span><span class="nav-item__label">Payments</span></a>
+          <a class="nav-item" href="./invoices.html"><span class="nav-item__icon">▭</span><span class="nav-item__label">Invoicing</span></a>
+          <a class="nav-item" href="./index.html"><span class="nav-item__icon">⧉</span><span class="nav-item__label">Documents</span></a>
+          <a class="nav-item" href="./index.html"><span class="nav-item__icon">▦</span><span class="nav-item__label">Reports</span></a>
+          <a class="nav-item" href="./customer.html"><span class="nav-item__icon">⚙</span><span class="nav-item__label">Settings</span></a>
+        </nav>
+        <div class="sidebar__footer">Uyum Kuyumculuk — Kadıköy</div>
+      </aside>
+
+      <div class="main">
+        <header class="topbar">
+          <div class="topbar__meta">
+            <span class="topbar__eyebrow">POS · bank transfer · cash · split · mock connectors</span>
+            <h1>Record payment</h1>
+          </div>
+          <div class="row">
+            <button class="btn btn--secondary" type="button" id="nav-toggle">Menu</button>
+            <a class="btn btn--ghost" href="./payments.html">Payment list</a>
+          </div>
+        </header>
+
+        <main class="canvas">
+          <div class="canvas__inner">
+            <section class="page-header">
+              <div class="page-header__copy">
+                <h2>Payment entry</h2>
+                <p class="text-secondary">
+                  Link a payment to a customer and transaction. On receipt, the transaction moves to <strong>Invoice Pending</strong>.
+                </p>
+              </div>
+            </section>
+
+            <div id="form-alert" class="alert alert--danger" hidden></div>
+
+            <form class="panel" id="payment-form">
+              <div class="panel__header">
+                <h3>Payment details</h3>
+                <span class="badge badge--neutral">Mock integrations</span>
+              </div>
+              <div class="panel__body stack">
+                <div class="connector-box">
+                  <strong id="connector-label">Mock POS connector</strong>
+                  <p class="text-small text-secondary">
+                    No live bank/POS APIs. Responses come from <code>mock-connectors.js</code>
+                    (<code>MockPosConnector</code>, <code>MockBankConnector</code>, <code>MockCashConnector</code>.
+                  </p>
+                </div>
+
+                <div class="form-layout form-layout--wide">
+                  <div class="form-row">
+                    <div class="field">
+                      <label class="field__label" for="customerId">Customer <span class="field__required">(required)</span></label>
+                      <select class="field__control" id="customerId" required></select>
+                    </div>
+                    <div class="field">
+                      <label class="field__label" for="transactionId">Transaction</label>
+                      <select class="field__control" id="transactionId"></select>
+                      <p class="field__hint">Leave empty to auto-create or match an open transaction.</p>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="field">
+                      <label class="field__label" for="amount">Amount (TRY) <span class="field__required">(required)</span></label>
+                      <input class="field__control mono" id="amount" type="number" min="0.01" step="0.01" required placeholder="248500.00" />
+                    </div>
+                    <div class="field">
+                      <label class="field__label" for="paymentDate">Date <span class="field__required">(required)</span></label>
+                      <input class="field__control" id="paymentDate" type="date" required />
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <span class="field__label">Payment method <span class="field__required">(required)</span></span>
+                    <div class="method-grid" style="margin-top: 0.5rem">
+                      <button class="method-card is-selected" type="button" data-method="pos">
+                        <span class="method-card__label">POS</span>
+                        <span class="method-card__hint">Card terminal (mock)</span>
+                      </button>
+                      <button class="method-card" type="button" data-method="bank_transfer">
+                        <span class="method-card__label">Bank transfer</span>
+                        <span class="method-card__hint">EFT / wire (mock)</span>
+                      </button>
+                      <button class="method-card" type="button" data-method="cash">
+                        <span class="method-card__label">Cash</span>
+                        <span class="method-card__hint">Cash drawer (mock)</span>
+                      </button>
+                      <button class="method-card" type="button" data-method="split">
+                        <span class="method-card__label">Split payment</span>
+                        <span class="method-card__hint">Combine methods</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div id="transfer-section" hidden>
+                    <div class="field">
+                      <label class="field__label" for="transferRef">Bank transfer reference</label>
+                      <input class="field__control mono" id="transferRef" placeholder="TRF-2026-0001" />
+                    </div>
+                  </div>
+
+                  <div id="split-section" hidden>
+                    <div class="stack-sm">
+                      <div class="row" style="justify-content: space-between">
+                        <strong>Split legs</strong>
+                        <button class="btn btn--secondary btn--sm" type="button" id="add-split-btn">Add split</button>
+                      </div>
+                      <div class="split-rows" id="split-rows"></div>
+                      <p class="field__hint">Split amounts must equal the total payment amount.</p>
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <label class="field__label" for="description">Description <span class="field__required">(required)</span></label>
+                    <textarea class="field__control" id="description" required placeholder="Counter sale — 22K bracelet"></textarea>
+                  </div>
+
+                  <div class="field">
+                    <span class="field__label">Document <span class="field__required">(required)</span></span>
+                    <div class="doc-drop" id="doc-drop">
+                      <p class="text-secondary text-small" id="doc-status">Attach a payment proof document (mock upload).</p>
+                      <div class="row">
+                        <button class="btn btn--secondary btn--sm" type="button" id="mock-doc-btn">Attach Document (Mock)</button>
+                        <input class="field__control" id="documentName" placeholder="filename.pdf" required style="max-width: 280px" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel__footer">
+                <a class="btn btn--ghost" href="./payments.html">Cancel</a>
+                <button class="btn btn--primary" type="submit" id="submit-btn">Record Payment</button>
+              </div>
+            </form>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="./js/security.js?v=6"></script>
+    <script src="./js/mock-connectors.js?v=6"></script>
+    <script src="./js/payment-service.js?v=6"></script>
+    <script src="./js/payment-form.js?v=6"></script>
+  </body>
+</html>

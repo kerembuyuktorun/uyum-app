@@ -1,0 +1,114 @@
+/* Privacy consent + security layer */
+
+.privacy-notice {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--navy-100);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.privacy-notice h4 {
+  margin: 0;
+  font-size: var(--text-h3);
+}
+
+.privacy-notice__body {
+  color: var(--color-text-secondary);
+  font-size: var(--text-small);
+  line-height: 1.5;
+  max-height: 140px;
+  overflow: auto;
+  padding-right: var(--space-2);
+}
+
+.privacy-notice__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.masked-value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.masked-value.is-redacted {
+  color: var(--color-text-muted);
+}
+
+.security-banner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.role-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.role-switch label {
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.role-switch select {
+  min-width: 180px;
+}
+
+.audit-table .mono {
+  font-size: 0.75rem;
+}
+
+.consent-record {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.consent-record:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.consent-record__title {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.consent-record__meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2) var(--space-4);
+  font-size: var(--text-small);
+  color: var(--color-text-secondary);
+}
+
+.consent-record__meta dt {
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.consent-record__meta dd {
+  margin: 0;
+  word-break: break-word;
+}
+
+@media (max-width: 767px) {
+  .consent-record__meta {
+    grid-template-columns: 1fr;
+  }
+}

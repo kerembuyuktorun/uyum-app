@@ -1,0 +1,51 @@
+{
+  "documentTypes": ["e-Invoice", "e-Archive"],
+  "statuses": ["Draft", "Sending", "Successful", "Failed", "Cancelled"],
+  "invoice": {
+    "id": "INV-…",
+    "number": "INV-2026-xxxxx",
+    "documentType": "e-Invoice | e-Archive",
+    "status": "Draft | Sending | Successful | Failed | Cancelled",
+    "customer": {
+      "id": "CUS-…",
+      "fullName": "string",
+      "taxOrNationalId": "string",
+      "email": "string",
+      "address": "string"
+    },
+    "payment": {
+      "id": "PAY-…",
+      "amount": "number",
+      "method": "string",
+      "transactionId": "TXN-…"
+    },
+    "lineItems": [
+      {
+        "description": "string",
+        "quantity": "number",
+        "unitPrice": "number",
+        "lineNet": "number"
+      }
+    ],
+    "totals": {
+      "subtotal": "number",
+      "vatRate": "number",
+      "vatAmount": "number",
+      "grandTotal": "number"
+    },
+    "suggestions": [
+      { "field": "customer.taxOrNationalId", "action": "correction guidance" }
+    ],
+    "ettn": "string|null"
+  },
+  "integration": {
+    "adapter": "EDocumentAdapter",
+    "service": "MockEDocumentService",
+    "methods": ["submit", "cancel"]
+  },
+  "failureDemoRules": [
+    "tax/national ID ending with 000",
+    "notes containing FORCE-FAIL",
+    "missing address / email / line items"
+  ]
+}
