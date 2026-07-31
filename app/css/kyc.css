@@ -71,7 +71,13 @@
   color: var(--white);
 }
 
-.step-panel[hidden] {
+.step-panel[hidden],
+#back-btn[hidden],
+#next-btn[hidden],
+#confirm-btn[hidden],
+#step-alert[hidden],
+#empty-view[hidden],
+#profile-view[hidden] {
   display: none !important;
 }
 
