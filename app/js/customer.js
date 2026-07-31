@@ -90,6 +90,8 @@ function renderProfile(profile) {
   $("profile-id").textContent = profile.id;
   const payLink = $("add-payment-link");
   if (payLink) payLink.href = `./payment-new.html?customerId=${encodeURIComponent(profile.id)}`;
+  const invLink = $("issue-invoice-link");
+  if (invLink) invLink.href = `./invoice-new.html?customerId=${encodeURIComponent(profile.id)}`;
   $("profile-created").textContent = `Created ${profile.createdLabel}`;
   $("profile-store").textContent = profile.store;
   $("kyc-badge").textContent = profile.kycStatus;

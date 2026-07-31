@@ -17,6 +17,7 @@ const actionCopy = {
   "issue-invoice": {
     title: "Issue Invoice",
     body: "Opening e-Invoice / e-Archive issue flow…",
+    href: "./invoice-new.html",
   },
   "search-archive": {
     title: "Search Archive",

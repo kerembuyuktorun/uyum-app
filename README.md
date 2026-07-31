@@ -11,26 +11,25 @@ Uyum is a web-based SaaS platform for jewelers that combines AML/KYC compliance,
 | Dashboard | [`app/index.html`](app/index.html) |
 | KYC onboarding | [`app/kyc.html`](app/kyc.html) |
 | Customer profile | [`app/customer.html`](app/customer.html) |
-| **Payments list** | [`app/payments.html`](app/payments.html) |
-| **Record payment** | [`app/payment-new.html`](app/payment-new.html) |
+| Payments | [`app/payments.html`](app/payments.html) |
+| Record payment | [`app/payment-new.html`](app/payment-new.html) |
+| **Invoices** | [`app/invoices.html`](app/invoices.html) |
+| **Create e-document** | [`app/invoice-new.html`](app/invoice-new.html) |
 
 ### Preview
 
 ```bash
 python3 -m http.server 4173 --directory .
-# Payments: http://localhost:4173/app/payments.html
-# Entry:    http://localhost:4173/app/payment-new.html
+# Invoices: http://localhost:4173/app/invoices.html
+# Create:   http://localhost:4173/app/invoice-new.html
 ```
 
-### Payment management (Step 6)
+### e-Invoice / e-Archive (Step 7)
 
-- Methods: POS, bank transfer, cash, split
-- Linked fields: customer, transaction, amount, date, method, description, document
-- Received payment → transaction status **Invoice Pending**
-- Mock connectors in `app/js/mock-connectors.js`
+- Create from customer + payment + line items
+- Statuses: Draft · Sending · Successful · Failed · Cancelled
+- Failed → clear correction suggestions
+- Mock adapter: `EDocumentAdapter` → `MockEDocumentService`
+- PDF preview pane on create + list screens
 
-Docs: [`docs/payments.md`](docs/payments.md) · [`docs/privacy-security.md`](docs/privacy-security.md) · [`docs/kyc-flow.md`](docs/kyc-flow.md)
-
-## Design system
-
-Living styleguide: [`design-system/index.html`](design-system/index.html)
+Docs: [`docs/invoices.md`](docs/invoices.md) · [`docs/payments.md`](docs/payments.md) · [`docs/privacy-security.md`](docs/privacy-security.md)

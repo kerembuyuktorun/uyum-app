@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uyum — Issue Invoice</title>
+    <link rel="stylesheet" href="../design-system/tokens.css" />
+    <link rel="stylesheet" href="../design-system/base.css" />
+    <link rel="stylesheet" href="../design-system/layout.css" />
+    <link rel="stylesheet" href="../design-system/components.css" />
+    <link rel="stylesheet" href="./css/dashboard.css" />
+    <link rel="stylesheet" href="./css/kyc.css" />
+    <link rel="stylesheet" href="./css/payments.css" />
+    <link rel="stylesheet" href="./css/invoices.css" />
+  </head>
+  <body>
+    <div class="app-shell" id="shell">
+      <div class="nav-backdrop" id="nav-backdrop"></div>
+      <aside class="sidebar" aria-label="Primary">
+        <a class="sidebar__brand" href="./index.html">
+          <span class="sidebar__brand-name">Uy<span>um</span></span>
+          <span class="sidebar__brand-tag">Operations</span>
+        </a>
+        <nav class="sidebar__nav">
+          <a class="nav-item" href="./index.html"><span class="nav-item__icon">▣</span><span class="nav-item__label">Dashboard</span></a>
+          <a class="nav-item" href="./kyc.html"><span class="nav-item__icon">◎</span><span class="nav-item__label">Customers</span></a>
+          <a class="nav-item" href="./kyc.html"><span class="nav-item__icon">✓</span><span class="nav-item__label">Compliance</span></a>
+          <a class="nav-item" href="./payments.html"><span class="nav-item__icon">⇄</span><span class="nav-item__label">Payments</span></a>
+          <a class="nav-item is-active" href="./invoices.html"><span class="nav-item__icon">▭</span><span class="nav-item__label">Invoicing</span></a>
+          <a class="nav-item" href="./index.html"><span class="nav-item__icon">⧉</span><span class="nav-item__label">Documents</span></a>
+          <a class="nav-item" href="./index.html"><span class="nav-item__icon">▦</span><span class="nav-item__label">Reports</span></a>
+          <a class="nav-item" href="./customer.html"><span class="nav-item__icon">⚙</span><span class="nav-item__label">Settings</span></a>
+        </nav>
+        <div class="sidebar__footer">Uyum Kuyumculuk — Kadıköy</div>
+      </aside>
+
+      <div class="main">
+        <header class="topbar">
+          <div class="topbar__meta">
+            <span class="topbar__eyebrow">e-Invoice / e-Archive · mock integrator adapter</span>
+            <h1>Create e-document</h1>
+          </div>
+          <div class="row">
+            <button class="btn btn--secondary" type="button" id="nav-toggle">Menu</button>
+            <a class="btn btn--ghost" href="./invoices.html">Invoice list</a>
+          </div>
+        </header>
+
+        <main class="canvas">
+          <div class="canvas__inner">
+            <section class="page-header">
+              <div class="page-header__copy">
+                <h2>Invoice creation</h2>
+                <p class="text-secondary">
+                  Build from customer details, payment information, and sale line items. Statuses: Draft → Sending → Successful / Failed / Cancelled.
+                </p>
+              </div>
+              <div class="page-header__actions">
+                <span class="badge badge--neutral" id="invoice-id-label">New draft</span>
+              </div>
+            </section>
+
+            <div id="form-alert" class="alert alert--danger" hidden></div>
+            <div id="failure-panel" hidden></div>
+
+            <div class="invoice-layout">
+              <section class="panel">
+                <div class="panel__header">
+                  <h3>Document details</h3>
+                  <span class="text-small text-muted">Mock service — no live tax API</span>
+                </div>
+                <div class="panel__body stack">
+                  <div class="doc-type-toggle">
+                    <button class="btn btn--secondary doc-type-btn is-selected" type="button" data-type="e-Invoice">e-Invoice</button>
+                    <button class="btn btn--secondary doc-type-btn" type="button" data-type="e-Archive">e-Archive</button>
+                  </div>
+
+                  <div class="form-layout form-layout--wide">
+                    <div class="form-row">
+                      <div class="field">
+                        <label class="field__label" for="invoice-number">Invoice number</label>
+                        <input class="field__control mono" id="invoice-number" />
+                      </div>
+                      <div class="field">
+                        <label class="field__label" for="issueDate">Issue date</label>
+                        <input class="field__control" id="issueDate" type="date" />
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="field">
+                        <label class="field__label" for="customerId">Customer</label>
+                        <select class="field__control" id="customerId"></select>
+                      </div>
+                      <div class="field">
+                        <label class="field__label" for="paymentId">Linked payment</label>
+                        <select class="field__control" id="paymentId"></select>
+                      </div>
+                    </div>
+
+                    <div class="field">
+                      <label class="field__label" for="customerName">Customer full name</label>
+                      <input class="field__control" id="customerName" />
+                    </div>
+                    <div class="form-row">
+                      <div class="field">
+                        <label class="field__label" for="taxOrNationalId">Tax / national ID</label>
+                        <input class="field__control mono" id="taxOrNationalId" placeholder="11-digit ID" />
+                        <p class="field__hint">Tip: IDs ending in 000 mock-fail for demo corrections.</p>
+                      </div>
+                      <div class="field">
+                        <label class="field__label" for="customerEmail">Email</label>
+                        <input class="field__control" id="customerEmail" type="email" />
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label class="field__label" for="customerAddress">Address</label>
+                      <textarea class="field__control" id="customerAddress"></textarea>
+                    </div>
+
+                    <div class="stack-sm">
+                      <div class="row" style="justify-content: space-between">
+                        <strong>Sale line items</strong>
+                        <button class="btn btn--secondary btn--sm" type="button" id="add-line-btn">Add line</button>
+                      </div>
+                      <div class="line-rows" id="line-rows"></div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="field">
+                        <label class="field__label" for="vatRate">VAT %</label>
+                        <input class="field__control mono" id="vatRate" type="number" value="20" min="0" step="1" />
+                      </div>
+                      <div class="totals-box">
+                        <div><span>Subtotal</span><strong class="mono" id="total-subtotal">TRY 0,00</strong></div>
+                        <div><span>VAT</span><strong class="mono" id="total-vat">TRY 0,00</strong></div>
+                        <div><span>Grand total</span><strong class="mono" id="total-grand">TRY 0,00</strong></div>
+                      </div>
+                    </div>
+
+                    <div class="field">
+                      <label class="field__label" for="notes">Notes</label>
+                      <textarea class="field__control" id="notes" placeholder="Optional. Use FORCE-FAIL to demo a reject."></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel__footer">
+                  <button class="btn btn--ghost" type="button" id="save-draft-btn">Save</button>
+                  <button class="btn btn--primary" type="button" id="issue-btn">Issue Invoice</button>
+                </div>
+              </section>
+
+              <aside class="panel preview-shell">
+                <div class="panel__header">
+                  <h3>PDF preview</h3>
+                  <div class="preview-toolbar">
+                    <span class="badge badge--neutral" id="preview-status">Draft</span>
+                    <button class="btn btn--secondary btn--sm" type="button" id="refresh-preview-btn">Refresh Preview</button>
+                  </div>
+                </div>
+                <div class="panel__body">
+                  <iframe class="preview-frame" id="preview-frame" title="Invoice PDF preview"></iframe>
+                  <p class="text-small text-muted" style="margin-top: 0.75rem">
+                    Preview is generated in-browser from the draft. Sending uses <code>EDocumentAdapter</code> → <code>MockEDocumentService</code>.
+                  </p>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="./js/security.js?v=7"></script>
+    <script src="./js/mock-connectors.js?v=7"></script>
+    <script src="./js/payment-service.js?v=7"></script>
+    <script src="./js/mock-edocument.js?v=7"></script>
+    <script src="./js/invoice-service.js?v=7"></script>
+    <script src="./js/invoice-form.js?v=7"></script>
+  </body>
+</html>

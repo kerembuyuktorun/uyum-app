@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Uyum — Payments</title>
+    <title>Uyum — Invoices</title>
     <link rel="stylesheet" href="../design-system/tokens.css" />
     <link rel="stylesheet" href="../design-system/base.css" />
     <link rel="stylesheet" href="../design-system/layout.css" />
@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/dashboard.css" />
     <link rel="stylesheet" href="./css/kyc.css" />
     <link rel="stylesheet" href="./css/payments.css" />
+    <link rel="stylesheet" href="./css/invoices.css" />
   </head>
   <body>
     <div class="app-shell" id="shell">
@@ -24,8 +25,8 @@
           <a class="nav-item" href="./index.html"><span class="nav-item__icon">▣</span><span class="nav-item__label">Dashboard</span></a>
           <a class="nav-item" href="./kyc.html"><span class="nav-item__icon">◎</span><span class="nav-item__label">Customers</span></a>
           <a class="nav-item" href="./kyc.html"><span class="nav-item__icon">✓</span><span class="nav-item__label">Compliance</span></a>
-          <a class="nav-item is-active" href="./payments.html"><span class="nav-item__icon">⇄</span><span class="nav-item__label">Payments</span></a>
-          <a class="nav-item" href="./invoices.html"><span class="nav-item__icon">▭</span><span class="nav-item__label">Invoicing</span></a>
+          <a class="nav-item" href="./payments.html"><span class="nav-item__icon">⇄</span><span class="nav-item__label">Payments</span></a>
+          <a class="nav-item is-active" href="./invoices.html"><span class="nav-item__icon">▭</span><span class="nav-item__label">Invoicing</span></a>
           <a class="nav-item" href="./index.html"><span class="nav-item__icon">⧉</span><span class="nav-item__label">Documents</span></a>
           <a class="nav-item" href="./index.html"><span class="nav-item__icon">▦</span><span class="nav-item__label">Reports</span></a>
           <a class="nav-item" href="./customer.html"><span class="nav-item__icon">⚙</span><span class="nav-item__label">Settings</span></a>
@@ -36,12 +37,12 @@
       <div class="main">
         <header class="topbar">
           <div class="topbar__meta">
-            <span class="topbar__eyebrow">Payment management · customer &amp; invoice linking</span>
-            <h1>Payments</h1>
+            <span class="topbar__eyebrow">e-Invoice · e-Archive · status management</span>
+            <h1>Invoices</h1>
           </div>
           <div class="row">
             <button class="btn btn--secondary" type="button" id="nav-toggle">Menu</button>
-            <a class="btn btn--primary" href="./payment-new.html">Add Payment</a>
+            <a class="btn btn--primary" href="./invoice-new.html">Issue Invoice</a>
           </div>
         </header>
 
@@ -49,57 +50,64 @@
           <div class="canvas__inner">
             <section class="page-header">
               <div class="page-header__copy">
-                <h2>Payment list</h2>
+                <h2>Invoice list</h2>
                 <p class="text-secondary">
-                  Track POS, bank transfer, cash, and split payments. Received payments set the linked transaction to Invoice Pending.
+                  Track Draft, Sending, Successful, Failed, and Cancelled e-documents. Failed rows show correction suggestions.
                 </p>
               </div>
             </section>
 
-            <section class="payment-summary" aria-label="Payment summary">
+            <section class="payment-summary">
               <div class="stat-tile">
-                <div class="stat-tile__value" id="stat-payments">0</div>
-                <div class="stat-tile__label">Payments recorded</div>
+                <div class="stat-tile__value" id="stat-total">0</div>
+                <div class="stat-tile__label">Total documents</div>
               </div>
               <div class="stat-tile">
-                <div class="stat-tile__value" id="stat-received">TRY 0</div>
-                <div class="stat-tile__label">Received total</div>
+                <div class="stat-tile__value" id="stat-successful">0</div>
+                <div class="stat-tile__label">Successful</div>
               </div>
               <div class="stat-tile">
-                <div class="stat-tile__value" id="stat-invoice-pending">0</div>
-                <div class="stat-tile__label">Invoice Pending transactions</div>
+                <div class="stat-tile__value" id="stat-failed">0</div>
+                <div class="stat-tile__label">Failed</div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel__header">
+                <h3>Status overview</h3>
+                <div class="status-chips" id="status-chips"></div>
               </div>
             </section>
 
             <section class="dashboard-split">
               <div class="panel">
                 <div class="panel__header">
-                  <h3>All payments</h3>
-                  <a class="btn btn--secondary btn--sm" href="./payment-new.html">Add Payment</a>
+                  <h3>All invoices</h3>
+                  <a class="btn btn--secondary btn--sm" href="./invoice-new.html">Issue Invoice</a>
                 </div>
                 <div class="panel__body">
                   <div class="filter-bar">
                     <div class="field">
                       <label class="field__label" for="filter-query">Search</label>
-                      <input class="field__control" id="filter-query" placeholder="Customer, PAY-, TXN-" />
+                      <input class="field__control" id="filter-query" placeholder="INV-, customer, PAY-" />
                     </div>
                     <div class="field">
-                      <label class="field__label" for="filter-method">Method</label>
-                      <select class="field__control" id="filter-method">
-                        <option value="">All methods</option>
-                        <option value="pos">POS</option>
-                        <option value="bank_transfer">Bank transfer</option>
-                        <option value="cash">Cash</option>
-                        <option value="split">Split</option>
+                      <label class="field__label" for="filter-type">Type</label>
+                      <select class="field__control" id="filter-type">
+                        <option value="">All types</option>
+                        <option value="e-Invoice">e-Invoice</option>
+                        <option value="e-Archive">e-Archive</option>
                       </select>
                     </div>
                     <div class="field">
                       <label class="field__label" for="filter-status">Status</label>
                       <select class="field__control" id="filter-status">
                         <option value="">All statuses</option>
-                        <option value="received">Received</option>
-                        <option value="failed">Failed</option>
-                        <option value="processing">Processing</option>
+                        <option value="Draft">Draft</option>
+                        <option value="Sending">Sending</option>
+                        <option value="Successful">Successful</option>
+                        <option value="Failed">Failed</option>
+                        <option value="Cancelled">Cancelled</option>
                       </select>
                     </div>
                   </div>
@@ -108,17 +116,17 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th class="sticky-col">Payment</th>
+                        <th class="sticky-col">Number</th>
+                        <th>Type</th>
                         <th>Customer</th>
-                        <th>Transaction</th>
                         <th class="num">Amount</th>
-                        <th>Method</th>
                         <th>Date</th>
-                        <th>Payment status</th>
-                        <th>Txn status</th>
+                        <th>Status</th>
+                        <th>Payment</th>
+                        <th>Actions</th>
                       </tr>
                     </thead>
-                    <tbody id="payments-body">
+                    <tbody id="invoices-body">
                       <tr><td colspan="8" class="text-muted">Loading…</td></tr>
                     </tbody>
                   </table>
@@ -128,19 +136,36 @@
               <div class="stack">
                 <div class="panel">
                   <div class="panel__header">
-                    <h3>Invoice Pending</h3>
-                    <span class="badge badge--warning">Queue</span>
+                    <h3>Invoice Pending queue</h3>
+                    <span class="badge badge--warning">From payments</span>
                   </div>
                   <div class="panel__body">
-                    <ul class="attention-list" id="invoice-pending-list"></ul>
+                    <ul class="attention-list" id="pending-queue"></ul>
                   </div>
                 </div>
                 <div class="panel">
                   <div class="panel__header">
-                    <h3>Mock connectors</h3>
+                    <h3>Mock adapter</h3>
                   </div>
-                  <div class="panel__body" id="connector-help"></div>
+                  <div class="panel__body text-small text-secondary stack-sm">
+                    <div><code>EDocumentAdapter.submit()</code></div>
+                    <div><code>MockEDocumentService.send()</code></div>
+                    <div>Failed responses include field-level correction suggestions.</div>
+                  </div>
                 </div>
+              </div>
+            </section>
+
+            <section class="panel" id="list-preview-panel" hidden>
+              <div class="panel__header">
+                <h3 id="list-preview-title">PDF preview</h3>
+                <div class="preview-toolbar">
+                  <span class="badge badge--neutral" id="list-preview-status">Draft</span>
+                  <button class="btn btn--ghost btn--sm" type="button" id="close-preview-btn">Close</button>
+                </div>
+              </div>
+              <div class="panel__body">
+                <iframe class="preview-frame" id="list-preview-frame" title="Invoice PDF preview"></iframe>
               </div>
             </section>
           </div>
@@ -148,9 +173,11 @@
       </div>
     </div>
 
-    <script src="./js/security.js?v=6"></script>
-    <script src="./js/mock-connectors.js?v=6"></script>
-    <script src="./js/payment-service.js?v=6"></script>
-    <script src="./js/payments-list.js?v=6"></script>
+    <script src="./js/security.js?v=7"></script>
+    <script src="./js/mock-connectors.js?v=7"></script>
+    <script src="./js/payment-service.js?v=7"></script>
+    <script src="./js/mock-edocument.js?v=7"></script>
+    <script src="./js/invoice-service.js?v=7"></script>
+    <script src="./js/invoices-list.js?v=7"></script>
   </body>
 </html>
