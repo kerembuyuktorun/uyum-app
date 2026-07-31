@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uyum — KYC Onboarding</title>
+    <link rel="stylesheet" href="../design-system/tokens.css" />
+    <link rel="stylesheet" href="../design-system/base.css" />
+    <link rel="stylesheet" href="../design-system/layout.css" />
+    <link rel="stylesheet" href="../design-system/components.css" />
+    <link rel="stylesheet" href="./css/dashboard.css" />
+    <link rel="stylesheet" href="./css/kyc.css" />
+    <link rel="stylesheet" href="./css/security.css" />
+  </head>
+  <body>
+    <div class="app-shell" id="shell">
+      <div class="nav-backdrop" id="nav-backdrop"></div>
+      <aside class="sidebar" aria-label="Primary">
+        <a class="sidebar__brand" href="./index.html">
+          <span class="sidebar__brand-name">Uy<span>um</span></span>
+          <span class="sidebar__brand-tag">Operations</span>
+        </a>
+        <nav class="sidebar__nav">
+          <a class="nav-item" href="./index.html"><span class="nav-item__icon">▣</span><span class="nav-item__label">Dashboard</span></a>
+          <a class="nav-item is-active" href="./kyc.html"><span class="nav-item__icon">◎</span><span class="nav-item__label">Customers</span></a>
+          <a class="nav-item" href="./kyc.html"><span class="nav-item__icon">✓</span><span class="nav-item__label">Compliance</span></a>
+          <a class="nav-item" href="./index.html#attention"><span class="nav-item__icon">⇄</span><span class="nav-item__label">Payments</span></a>
+          <a class="nav-item" href="./index.html#attention"><span class="nav-item__icon">▭</span><span class="nav-item__label">Invoicing</span></a>
+          <a class="nav-item" href="./index.html"><span class="nav-item__icon">⧉</span><span class="nav-item__label">Documents</span></a>
+          <a class="nav-item" href="./index.html"><span class="nav-item__icon">▦</span><span class="nav-item__label">Reports</span></a>
+          <a class="nav-item" href="./index.html"><span class="nav-item__icon">⚙</span><span class="nav-item__label">Settings</span></a>
+        </nav>
+        <div class="sidebar__footer">Uyum Kuyumculuk — Kadıköy</div>
+      </aside>
+
+      <div class="main">
+        <header class="topbar">
+          <div class="topbar__meta">
+            <span class="topbar__eyebrow">AML / KYC · ~1 minute counter flow</span>
+            <h1>Customer onboarding</h1>
+          </div>
+          <div class="row">
+            <button class="btn btn--secondary" type="button" id="nav-toggle" aria-label="Open menu">Menu</button>
+            <a class="btn btn--ghost" href="./index.html">Back to Dashboard</a>
+          </div>
+        </header>
+
+        <main class="canvas">
+          <div class="canvas__inner">
+            <section class="page-header">
+              <div class="page-header__copy">
+                <h2 id="step-title">Identity</h2>
+                <p class="text-secondary">
+                  Capture identity, contact, purpose, and consents when a customer arrives. Completed fields show a green check.
+                </p>
+              </div>
+            </section>
+
+            <div id="stepper" class="stepper" aria-label="KYC steps"></div>
+
+            <div class="kyc-layout">
+              <div class="kyc-main">
+                <div id="step-alert" class="alert alert--danger" hidden></div>
+
+                <section class="panel step-panel" data-step="identity">
+                  <div class="panel__header">
+                    <h3>Identity details</h3>
+                    <span class="badge badge--info">Step 1 of 5</span>
+                  </div>
+                  <div class="panel__body">
+                    <div class="step-panel__intro">
+                      <p class="text-secondary">Scan an ID to prefill, or type details manually.</p>
+                    </div>
+
+                    <div class="ocr-box" id="ocr-box">
+                      <div class="ocr-box__preview">ID SCAN<br />PLACEHOLDER</div>
+                      <div class="ocr-box__copy">
+                        <strong>Mock OCR identity scan</strong>
+                        <p class="text-small text-secondary" id="ocr-status">
+                          Mock OCR identity scan placeholder — no camera required.
+                        </p>
+                        <div class="ocr-box__actions">
+                          <button class="btn btn--secondary" type="button" id="ocr-scan-btn">Scan ID (Mock OCR)</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-layout form-layout--wide">
+                      <div class="form-row">
+                        <div class="field" data-field="nationalId">
+                          <label class="field__label" for="nationalId">
+                            National ID number <span class="field__required">(required)</span>
+                            <span class="field__status" aria-hidden="true">✓</span>
+                          </label>
+                          <input class="field__control mono" id="nationalId" name="nationalId" inputmode="numeric" maxlength="11" autocomplete="off" />
+                          <p class="field__error"></p>
+                        </div>
+                        <div class="field" data-field="birthDate">
+                          <label class="field__label" for="birthDate">
+                            Birth date <span class="field__required">(required)</span>
+                            <span class="field__status" aria-hidden="true">✓</span>
+                          </label>
+                          <input class="field__control" id="birthDate" name="birthDate" type="date" />
+                          <p class="field__error"></p>
+                        </div>
+                      </div>
+                      <div class="field" data-field="fullName">
+                        <label class="field__label" for="fullName">
+                          Full name <span class="field__required">(required)</span>
+                          <span class="field__status" aria-hidden="true">✓</span>
+                        </label>
+                        <input class="field__control" id="fullName" name="fullName" autocomplete="name" />
+                        <p class="field__error"></p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="panel step-panel" data-step="contact" hidden>
+                  <div class="panel__header">
+                    <h3>Contact details &amp; address</h3>
+                    <span class="badge badge--info">Step 2 of 5</span>
+                  </div>
+                  <div class="panel__body">
+                    <div class="form-layout form-layout--wide">
+                      <div class="form-row">
+                        <div class="field" data-field="phone">
+                          <label class="field__label" for="phone">
+                            Phone <span class="field__required">(required)</span>
+                            <span class="field__status" aria-hidden="true">✓</span>
+                          </label>
+                          <input class="field__control" id="phone" name="phone" type="tel" placeholder="+90 5xx xxx xx xx" />
+                          <p class="field__error"></p>
+                        </div>
+                        <div class="field" data-field="email">
+                          <label class="field__label" for="email">
+                            Email <span class="field__required">(required)</span>
+                            <span class="field__status" aria-hidden="true">✓</span>
+                          </label>
+                          <input class="field__control" id="email" name="email" type="email" placeholder="name@example.com" />
+                          <p class="field__error"></p>
+                        </div>
+                      </div>
+                      <div class="field" data-field="address">
+                        <label class="field__label" for="address">
+                          Address <span class="field__required">(required)</span>
+                          <span class="field__status" aria-hidden="true">✓</span>
+                        </label>
+                        <textarea class="field__control" id="address" name="address" placeholder="Street, district, city"></textarea>
+                        <p class="field__error"></p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="panel step-panel" data-step="purpose" hidden>
+                  <div class="panel__header">
+                    <h3>Occupation &amp; transaction purpose</h3>
+                    <span class="badge badge--info">Step 3 of 5</span>
+                  </div>
+                  <div class="panel__body">
+                    <div class="form-layout form-layout--wide">
+                      <div class="field" data-field="occupation">
+                        <label class="field__label" for="occupation">
+                          Occupation <span class="field__required">(required)</span>
+                          <span class="field__status" aria-hidden="true">✓</span>
+                        </label>
+                        <input class="field__control" id="occupation" name="occupation" placeholder="e.g. Architect, Retail manager" />
+                        <p class="field__error"></p>
+                      </div>
+                      <div class="field" data-field="transactionPurpose">
+                        <label class="field__label" for="transactionPurpose">
+                          Transaction purpose <span class="field__required">(required)</span>
+                          <span class="field__status" aria-hidden="true">✓</span>
+                        </label>
+                        <select class="field__control" id="transactionPurpose" name="transactionPurpose">
+                          <option value="">Select purpose</option>
+                          <option value="Personal jewelry purchase">Personal jewelry purchase</option>
+                          <option value="Gift">Gift</option>
+                          <option value="Investment / bullion">Investment / bullion</option>
+                          <option value="Wedding / engagement">Wedding / engagement</option>
+                          <option value="Business purchase">Business purchase</option>
+                          <option value="Other">Other</option>
+                        </select>
+                        <p class="field__error"></p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="panel step-panel" data-step="consent" hidden>
+                  <div class="panel__header">
+                    <h3>Privacy notice &amp; consents</h3>
+                    <span class="badge badge--info">Step 4 of 5</span>
+                  </div>
+                  <div class="panel__body consent-box">
+                    <div class="privacy-notice">
+                      <h4>Privacy notice</h4>
+                      <div class="privacy-notice__body">
+                        Uyum processes identity, contact, occupation, and transaction-purpose data to complete AML/KYC checks,
+                        record payments, issue e-Invoice/e-Archive documents, and retain audit-ready evidence.
+                        Data is stored for compliance retention periods applicable to jewelry dealers, shared only with authorized
+                        staff and legally required authorities, and protected with role-based access controls.
+                        Customers may request access or correction through the store. Full notice version is recorded with each consent.
+                      </div>
+                      <div class="privacy-notice__meta">
+                        <span class="badge badge--neutral" id="consent-form-version">Form version</span>
+                        <span class="badge badge--neutral" id="consent-actor">Captured by</span>
+                      </div>
+                    </div>
+
+                    <label class="consent-item field" data-field="privacyNoticeAck" for="privacyNoticeAck">
+                      <input id="privacyNoticeAck" name="privacyNoticeAck" type="checkbox" />
+                      <span>
+                        <strong>Privacy notice acknowledged <span class="field__status" aria-hidden="true">✓</span></strong>
+                        <span class="text-secondary text-small">
+                          Customer confirms they have been shown and understand the privacy notice above.
+                        </span>
+                        <p class="field__error"></p>
+                      </span>
+                    </label>
+
+                    <label class="consent-item field" data-field="explicitConsent" for="explicitConsent">
+                      <input id="explicitConsent" name="explicitConsent" type="checkbox" />
+                      <span>
+                        <strong>Explicit processing consent <span class="field__status" aria-hidden="true">✓</span></strong>
+                        <span class="text-secondary text-small">
+                          Customer explicitly consents to processing of identity and contact data for AML/KYC compliance and transaction records.
+                        </span>
+                        <p class="field__error"></p>
+                      </span>
+                    </label>
+
+                    <label class="consent-item field" data-field="dataRetentionPermission" for="dataRetentionPermission">
+                      <input id="dataRetentionPermission" name="dataRetentionPermission" type="checkbox" />
+                      <span>
+                        <strong>Data retention permission <span class="field__status" aria-hidden="true">✓</span></strong>
+                        <span class="text-secondary text-small">
+                          Customer permits retention of KYC documents and transaction evidence for statutory audit and compliance periods.
+                        </span>
+                        <p class="field__error"></p>
+                      </span>
+                    </label>
+
+                    <label class="consent-item field" data-field="customerDeclaration" for="customerDeclaration">
+                      <input id="customerDeclaration" name="customerDeclaration" type="checkbox" />
+                      <span>
+                        <strong>Customer declaration <span class="field__status" aria-hidden="true">✓</span></strong>
+                        <span class="text-secondary text-small">
+                          Customer declares that the information provided is accurate and that funds used for this purchase are from a legitimate source.
+                        </span>
+                        <p class="field__error"></p>
+                      </span>
+                    </label>
+                  </div>
+                </section>
+
+                <section class="panel step-panel" data-step="confirm" hidden>
+                  <div class="panel__header">
+                    <h3>Final confirmation</h3>
+                    <span class="badge badge--info">Step 5 of 5</span>
+                  </div>
+                  <div class="panel__body stack">
+                    <p class="text-secondary">
+                      Review all details. Confirming generates the customer profile and marks KYC as cleared for this visit.
+                    </p>
+                    <dl class="review-grid" id="review-grid"></dl>
+                  </div>
+                </section>
+
+                <div class="panel">
+                  <div class="panel__footer" style="border-top: 0; border-radius: var(--radius-lg)">
+                    <button class="btn btn--ghost" type="button" id="back-btn" hidden>Back</button>
+                    <button class="btn btn--primary" type="button" id="next-btn">Continue</button>
+                    <button class="btn btn--primary" type="button" id="confirm-btn" hidden>Confirm</button>
+                  </div>
+                </div>
+              </div>
+
+              <aside class="kyc-side">
+                <div class="panel">
+                  <div class="panel__header">
+                    <h3>Field status</h3>
+                    <span class="text-small text-muted" id="progress-count">0/12 fields complete</span>
+                  </div>
+                  <div class="panel__body">
+                    <ul class="checklist" id="field-checklist"></ul>
+                  </div>
+                </div>
+                <div class="alert alert--info">
+                  <div class="alert__icon">i</div>
+                  <div>
+                    <div class="alert__title">Counter tip</div>
+                    <div class="alert__body">Use Scan ID first, then tab through contact fields. Aim to finish before the piece is packaged.</div>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="./js/security.js?v=5"></script>
+    <script src="./js/kyc.js?v=5"></script>
+  </body>
+</html>
