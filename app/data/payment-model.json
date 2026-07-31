@@ -1,0 +1,42 @@
+{
+  "payment": {
+    "id": "PAY-YYYYMMDD-XXXX",
+    "customerId": "CUS-…",
+    "customerName": "string",
+    "transactionId": "TXN-…",
+    "amount": "number",
+    "currency": "TRY",
+    "date": "ISO-8601",
+    "method": "pos | bank_transfer | cash | split",
+    "splits": [
+      {
+        "method": "pos | bank_transfer | cash",
+        "amount": "number",
+        "connectorRef": "string",
+        "provider": "mock-pos | mock-bank | mock-cash"
+      }
+    ],
+    "description": "string",
+    "document": {
+      "name": "string",
+      "type": "mime",
+      "source": "mock-upload"
+    },
+    "status": "draft | processing | received | failed",
+    "connectorResults": []
+  },
+  "transaction": {
+    "id": "TXN-…",
+    "customerId": "CUS-…",
+    "amount": "number",
+    "status": "open | payment_received | invoice_pending | invoiced",
+    "paymentIds": ["PAY-…"],
+    "statusReason": "Payment received — awaiting invoice issuance"
+  },
+  "statusRule": "When payment.status becomes received, linked transaction.status is set to invoice_pending.",
+  "mockConnectors": [
+    "MockPosConnector.charge",
+    "MockBankConnector.confirmTransfer",
+    "MockCashConnector.record"
+  ]
+}

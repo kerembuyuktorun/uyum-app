@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uyum — Dashboard</title>
+    <link rel="stylesheet" href="../design-system/tokens.css" />
+    <link rel="stylesheet" href="../design-system/base.css" />
+    <link rel="stylesheet" href="../design-system/layout.css" />
+    <link rel="stylesheet" href="../design-system/components.css" />
+    <link rel="stylesheet" href="./css/dashboard.css" />
+  </head>
+  <body>
+    <div class="app-shell" id="shell">
+      <div class="nav-backdrop" id="nav-backdrop"></div>
+      <aside class="sidebar" aria-label="Primary">
+        <a class="sidebar__brand" href="./index.html">
+          <span class="sidebar__brand-name">Uy<span>um</span></span>
+          <span class="sidebar__brand-tag">Operations</span>
+        </a>
+        <nav class="sidebar__nav">
+          <a class="nav-item is-active" href="./index.html"><span class="nav-item__icon">▣</span><span class="nav-item__label">Dashboard</span></a>
+          <a class="nav-item" href="./kyc.html"><span class="nav-item__icon">◎</span><span class="nav-item__label">Customers</span></a>
+          <a class="nav-item" href="./kyc.html"><span class="nav-item__icon">✓</span><span class="nav-item__label">Compliance</span></a>
+          <a class="nav-item" href="./payments.html"><span class="nav-item__icon">⇄</span><span class="nav-item__label">Payments</span></a>
+          <a class="nav-item" href="./payments.html"><span class="nav-item__icon">▭</span><span class="nav-item__label">Invoicing</span></a>
+          <a class="nav-item" href="#action-search-archive"><span class="nav-item__icon">⧉</span><span class="nav-item__label">Documents</span></a>
+          <a class="nav-item" href="#"><span class="nav-item__icon">▦</span><span class="nav-item__label">Reports</span></a>
+          <a class="nav-item" href="#"><span class="nav-item__icon">⚙</span><span class="nav-item__label">Settings</span></a>
+        </nav>
+        <div class="sidebar__footer" id="sidebar-store">Store</div>
+      </aside>
+
+      <div class="main">
+        <header class="topbar">
+          <div class="topbar__meta">
+            <span class="topbar__eyebrow" id="store-date">Loading…</span>
+            <h1 id="store-name">Dashboard</h1>
+          </div>
+          <div class="row">
+            <button class="btn btn--secondary" type="button" id="nav-toggle" aria-label="Open menu">Menu</button>
+            <div class="topbar__user">
+              <span class="topbar__user-name" id="employee-name">—</span>
+              <span class="text-small text-muted" id="employee-role">Store employee</span>
+            </div>
+          </div>
+        </header>
+
+        <main class="canvas">
+          <div class="canvas__inner">
+            <section class="page-header">
+              <div class="page-header__copy">
+                <h2>Daily operations</h2>
+                <p class="text-secondary">
+                  What needs attention at the counter today — KYC gaps, unpaid invoices, and audit-ready files.
+                </p>
+              </div>
+            </section>
+
+            <section aria-label="Market prices" id="prices">
+              <div class="price-board" id="price-board">
+                <div class="price-board__header">
+                  <div class="price-board__title">Gold &amp; currency prices</div>
+                  <span class="text-small text-muted">Loading placeholder feed…</span>
+                </div>
+              </div>
+            </section>
+
+            <section aria-label="Status summary" id="summary">
+              <div class="summary-grid" id="summary-grid"></div>
+            </section>
+
+            <section class="panel" aria-label="Quick actions">
+              <div class="panel__header">
+                <h3>Quick actions</h3>
+                <span class="text-small text-muted">Common counter tasks</span>
+              </div>
+              <div class="panel__body">
+                <div class="quick-actions" id="quick-actions"></div>
+              </div>
+            </section>
+
+            <section class="dashboard-split">
+              <div class="panel" id="recent-customers">
+                <div class="panel__header">
+                  <h3>Recent customers</h3>
+                  <a href="./kyc.html">New Customer</a>
+                </div>
+                <div class="table-wrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th class="sticky-col">Customer</th>
+                        <th>Seen</th>
+                        <th class="num">Last amount</th>
+                        <th>KYC</th>
+                        <th>Invoice</th>
+                      </tr>
+                    </thead>
+                    <tbody id="recent-customers-body">
+                      <tr>
+                        <td colspan="5" class="text-muted">Loading sample customers…</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="panel" id="attention">
+                <div class="panel__header">
+                  <h3>Needs attention</h3>
+                  <span class="badge badge--warning">Queue</span>
+                </div>
+                <div class="panel__body">
+                  <ul class="attention-list" id="attention-list"></ul>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <div class="toast-host" id="toast-host" aria-live="polite"></div>
+    <script src="./js/dashboard.js"></script>
+  </body>
+</html>
