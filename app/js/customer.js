@@ -222,6 +222,28 @@ function renderEmpty() {
   $("empty-view").hidden = false;
 }
 
+function ensureConsentRecords(profile) {
+  const sec = window.UyumSecurity;
+  const existing = sec.getConsentsForCustomer(profile.id);
+  if (existing.length) return existing;
+
+  const values = {
+    privacyNoticeAck: Boolean(profile.privacyNoticeAck ?? profile.privacyConsent),
+    explicitConsent: Boolean(profile.explicitConsent ?? profile.privacyConsent),
+    dataRetentionPermission: Boolean(
+      profile.dataRetentionPermission ?? profile.privacyConsent,
+    ),
+    customerDeclaration: Boolean(profile.customerDeclaration),
+  };
+
+  if (!Object.values(values).some(Boolean)) return [];
+
+  const records = sec.recordConsentBundle(profile.id, values);
+  profile.consentRecordIds = records.map((r) => r.id);
+  sessionStorage.setItem("uyum.latestCustomer", JSON.stringify(profile));
+  return records;
+}
+
 function loadProfile() {
   const raw = sessionStorage.getItem("uyum.latestCustomer");
   if (!raw) {
@@ -236,6 +258,7 @@ function loadProfile() {
       profile.privacyNoticeAck = profile.privacyConsent;
       profile.dataRetentionPermission = profile.privacyConsent;
     }
+    ensureConsentRecords(profile);
     renderProfile(profile);
     $("profile-view").hidden = false;
     $("empty-view").hidden = true;
