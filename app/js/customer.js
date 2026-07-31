@@ -88,6 +88,8 @@ function renderProfile(profile) {
 
   $("profile-name").textContent = view.fullNameDisplay;
   $("profile-id").textContent = profile.id;
+  const payLink = $("add-payment-link");
+  if (payLink) payLink.href = `./payment-new.html?customerId=${encodeURIComponent(profile.id)}`;
   $("profile-created").textContent = `Created ${profile.createdLabel}`;
   $("profile-store").textContent = profile.store;
   $("kyc-badge").textContent = profile.kycStatus;

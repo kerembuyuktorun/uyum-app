@@ -8,35 +8,28 @@ Uyum is a web-based SaaS platform for jewelers that combines AML/KYC compliance,
 
 | Screen | Path |
 |---|---|
-| Dashboard (post-login) | [`app/index.html`](app/index.html) |
-| **KYC onboarding** | [`app/kyc.html`](app/kyc.html) |
+| Dashboard | [`app/index.html`](app/index.html) |
+| KYC onboarding | [`app/kyc.html`](app/kyc.html) |
 | Customer profile | [`app/customer.html`](app/customer.html) |
+| **Payments list** | [`app/payments.html`](app/payments.html) |
+| **Record payment** | [`app/payment-new.html`](app/payment-new.html) |
 
 ### Preview
 
 ```bash
 python3 -m http.server 4173 --directory .
-# Dashboard: http://localhost:4173/app/
-# KYC flow:  http://localhost:4173/app/kyc.html
+# Payments: http://localhost:4173/app/payments.html
+# Entry:    http://localhost:4173/app/payment-new.html
 ```
 
-### KYC flow (Step 4)
+### Payment management (Step 6)
 
-Multi-step ~1 minute counter form:
+- Methods: POS, bank transfer, cash, split
+- Linked fields: customer, transaction, amount, date, method, description, document
+- Received payment → transaction status **Invoice Pending**
+- Mock connectors in `app/js/mock-connectors.js`
 
-1. Identity (+ mock OCR)  
-2. Contact & address  
-3. Occupation & purpose  
-4. Privacy notice, explicit consent, retention permission, declaration  
-5. Final confirmation → generated customer profile  
-
-### Privacy & security (Step 5)
-
-- Consent permission records with timestamp, user, IP/device, form version  
-- Role-based PII masking (employee masked, unauthorized hidden)  
-- Audit log on the customer profile screen  
-
-Docs: [`docs/privacy-security.md`](docs/privacy-security.md) · [`docs/kyc-flow.md`](docs/kyc-flow.md) · [`docs/dashboard.md`](docs/dashboard.md) · [`docs/design-system.md`](docs/design-system.md)
+Docs: [`docs/payments.md`](docs/payments.md) · [`docs/privacy-security.md`](docs/privacy-security.md) · [`docs/kyc-flow.md`](docs/kyc-flow.md)
 
 ## Design system
 

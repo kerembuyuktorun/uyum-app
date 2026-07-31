@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uyum — Payments</title>
+    <link rel="stylesheet" href="../design-system/tokens.css" />
+    <link rel="stylesheet" href="../design-system/base.css" />
+    <link rel="stylesheet" href="../design-system/layout.css" />
+    <link rel="stylesheet" href="../design-system/components.css" />
+    <link rel="stylesheet" href="./css/dashboard.css" />
+    <link rel="stylesheet" href="./css/kyc.css" />
+    <link rel="stylesheet" href="./css/payments.css" />
+  </head>
+  <body>
+    <div class="app-shell" id="shell">
+      <div class="nav-backdrop" id="nav-backdrop"></div>
+      <aside class="sidebar" aria-label="Primary">
+        <a class="sidebar__brand" href="./index.html">
+          <span class="sidebar__brand-name">Uy<span>um</span></span>
+          <span class="sidebar__brand-tag">Operations</span>
+        </a>
+        <nav class="sidebar__nav">
+          <a class="nav-item" href="./index.html"><span class="nav-item__icon">▣</span><span class="nav-item__label">Dashboard</span></a>
+          <a class="nav-item" href="./kyc.html"><span class="nav-item__icon">◎</span><span class="nav-item__label">Customers</span></a>
+          <a class="nav-item" href="./kyc.html"><span class="nav-item__icon">✓</span><span class="nav-item__label">Compliance</span></a>
+          <a class="nav-item is-active" href="./payments.html"><span class="nav-item__icon">⇄</span><span class="nav-item__label">Payments</span></a>
+          <a class="nav-item" href="./payments.html"><span class="nav-item__icon">▭</span><span class="nav-item__label">Invoicing</span></a>
+          <a class="nav-item" href="./index.html"><span class="nav-item__icon">⧉</span><span class="nav-item__label">Documents</span></a>
+          <a class="nav-item" href="./index.html"><span class="nav-item__icon">▦</span><span class="nav-item__label">Reports</span></a>
+          <a class="nav-item" href="./customer.html"><span class="nav-item__icon">⚙</span><span class="nav-item__label">Settings</span></a>
+        </nav>
+        <div class="sidebar__footer">Uyum Kuyumculuk — Kadıköy</div>
+      </aside>
+
+      <div class="main">
+        <header class="topbar">
+          <div class="topbar__meta">
+            <span class="topbar__eyebrow">Payment management · customer &amp; invoice linking</span>
+            <h1>Payments</h1>
+          </div>
+          <div class="row">
+            <button class="btn btn--secondary" type="button" id="nav-toggle">Menu</button>
+            <a class="btn btn--primary" href="./payment-new.html">Add Payment</a>
+          </div>
+        </header>
+
+        <main class="canvas">
+          <div class="canvas__inner">
+            <section class="page-header">
+              <div class="page-header__copy">
+                <h2>Payment list</h2>
+                <p class="text-secondary">
+                  Track POS, bank transfer, cash, and split payments. Received payments set the linked transaction to Invoice Pending.
+                </p>
+              </div>
+            </section>
+
+            <section class="payment-summary" aria-label="Payment summary">
+              <div class="stat-tile">
+                <div class="stat-tile__value" id="stat-payments">0</div>
+                <div class="stat-tile__label">Payments recorded</div>
+              </div>
+              <div class="stat-tile">
+                <div class="stat-tile__value" id="stat-received">TRY 0</div>
+                <div class="stat-tile__label">Received total</div>
+              </div>
+              <div class="stat-tile">
+                <div class="stat-tile__value" id="stat-invoice-pending">0</div>
+                <div class="stat-tile__label">Invoice Pending transactions</div>
+              </div>
+            </section>
+
+            <section class="dashboard-split">
+              <div class="panel">
+                <div class="panel__header">
+                  <h3>All payments</h3>
+                  <a class="btn btn--secondary btn--sm" href="./payment-new.html">Add Payment</a>
+                </div>
+                <div class="panel__body">
+                  <div class="filter-bar">
+                    <div class="field">
+                      <label class="field__label" for="filter-query">Search</label>
+                      <input class="field__control" id="filter-query" placeholder="Customer, PAY-, TXN-" />
+                    </div>
+                    <div class="field">
+                      <label class="field__label" for="filter-method">Method</label>
+                      <select class="field__control" id="filter-method">
+                        <option value="">All methods</option>
+                        <option value="pos">POS</option>
+                        <option value="bank_transfer">Bank transfer</option>
+                        <option value="cash">Cash</option>
+                        <option value="split">Split</option>
+                      </select>
+                    </div>
+                    <div class="field">
+                      <label class="field__label" for="filter-status">Status</label>
+                      <select class="field__control" id="filter-status">
+                        <option value="">All statuses</option>
+                        <option value="received">Received</option>
+                        <option value="failed">Failed</option>
+                        <option value="processing">Processing</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="table-wrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th class="sticky-col">Payment</th>
+                        <th>Customer</th>
+                        <th>Transaction</th>
+                        <th class="num">Amount</th>
+                        <th>Method</th>
+                        <th>Date</th>
+                        <th>Payment status</th>
+                        <th>Txn status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="payments-body">
+                      <tr><td colspan="8" class="text-muted">Loading…</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="stack">
+                <div class="panel">
+                  <div class="panel__header">
+                    <h3>Invoice Pending</h3>
+                    <span class="badge badge--warning">Queue</span>
+                  </div>
+                  <div class="panel__body">
+                    <ul class="attention-list" id="invoice-pending-list"></ul>
+                  </div>
+                </div>
+                <div class="panel">
+                  <div class="panel__header">
+                    <h3>Mock connectors</h3>
+                  </div>
+                  <div class="panel__body" id="connector-help"></div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="./js/security.js?v=6"></script>
+    <script src="./js/mock-connectors.js?v=6"></script>
+    <script src="./js/payment-service.js?v=6"></script>
+    <script src="./js/payments-list.js?v=6"></script>
+  </body>
+</html>

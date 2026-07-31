@@ -12,6 +12,7 @@ const actionCopy = {
   "add-payment": {
     title: "Add Payment",
     body: "Opening payment entry for today’s sales…",
+    href: "./payment-new.html",
   },
   "issue-invoice": {
     title: "Issue Invoice",
