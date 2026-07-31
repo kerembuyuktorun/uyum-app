@@ -27,12 +27,16 @@ Multi-step ~1 minute counter form:
 1. Identity (+ mock OCR)  
 2. Contact & address  
 3. Occupation & purpose  
-4. Privacy consent + customer declaration  
+4. Privacy notice, explicit consent, retention permission, declaration  
 5. Final confirmation → generated customer profile  
 
-Includes validations, missing-field alerts, and green completion indicators.
+### Privacy & security (Step 5)
 
-Docs: [`docs/kyc-flow.md`](docs/kyc-flow.md) · [`docs/dashboard.md`](docs/dashboard.md) · [`docs/design-system.md`](docs/design-system.md)
+- Consent permission records with timestamp, user, IP/device, form version  
+- Role-based PII masking (employee masked, unauthorized hidden)  
+- Audit log on the customer profile screen  
+
+Docs: [`docs/privacy-security.md`](docs/privacy-security.md) · [`docs/kyc-flow.md`](docs/kyc-flow.md) · [`docs/dashboard.md`](docs/dashboard.md) · [`docs/design-system.md`](docs/design-system.md)
 
 ## Design system
 

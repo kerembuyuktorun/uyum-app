@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../design-system/components.css" />
     <link rel="stylesheet" href="./css/dashboard.css" />
     <link rel="stylesheet" href="./css/kyc.css" />
+    <link rel="stylesheet" href="./css/security.css" />
   </head>
   <body>
     <div class="app-shell" id="shell">
@@ -27,7 +28,7 @@
           <a class="nav-item" href="./index.html#attention"><span class="nav-item__icon">▭</span><span class="nav-item__label">Invoicing</span></a>
           <a class="nav-item" href="./index.html"><span class="nav-item__icon">⧉</span><span class="nav-item__label">Documents</span></a>
           <a class="nav-item" href="./index.html"><span class="nav-item__icon">▦</span><span class="nav-item__label">Reports</span></a>
-          <a class="nav-item" href="./index.html"><span class="nav-item__icon">⚙</span><span class="nav-item__label">Settings</span></a>
+          <a class="nav-item" href="./customer.html"><span class="nav-item__icon">⚙</span><span class="nav-item__label">Settings</span></a>
         </nav>
         <div class="sidebar__footer">Uyum Kuyumculuk — Kadıköy</div>
       </aside>
@@ -35,7 +36,7 @@
       <div class="main">
         <header class="topbar">
           <div class="topbar__meta">
-            <span class="topbar__eyebrow">Generated from KYC onboarding</span>
+            <span class="topbar__eyebrow">Privacy · consent audit · role-based access</span>
             <h1>Customer profile</h1>
           </div>
           <div class="row">
@@ -47,20 +48,36 @@
 
         <main class="canvas">
           <div class="canvas__inner">
+            <section class="panel">
+              <div class="panel__body security-banner">
+                <div class="stack-sm">
+                  <strong>Security session</strong>
+                  <div class="text-small text-secondary" id="active-role-label">Store employee</div>
+                  <span class="badge badge--warning" id="pii-access-badge">Masked PII</span>
+                </div>
+                <div class="role-switch">
+                  <label for="role-select">View as</label>
+                  <select class="field__control" id="role-select" aria-label="Switch viewer role">
+                    <option value="employee">Store employee</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
             <section id="empty-view" class="panel">
               <div class="panel__body empty-state">
                 <div class="empty-state__title">No customer profile yet</div>
-                <p class="empty-state__body">Complete the KYC onboarding flow to generate a customer profile for this visit.</p>
+                <p class="empty-state__body">Complete the KYC onboarding flow to generate a customer profile and consent permission records.</p>
                 <a class="btn btn--primary" href="./kyc.html">Start KYC Form</a>
               </div>
             </section>
 
             <section id="profile-view" class="stack" hidden>
-              <div class="alert alert--success">
-                <div class="alert__icon">✓</div>
+              <div id="security-alert" class="alert alert--warning">
+                <div class="alert__icon">!</div>
                 <div>
-                  <div class="alert__title">KYC confirmed</div>
-                  <div class="alert__body">Customer profile generated and ready for payment and invoicing.</div>
+                  <div class="alert__title">Sensitive data masked</div>
+                  <div class="alert__body">National ID and contact details are partially masked for this role.</div>
                 </div>
               </div>
 
@@ -80,6 +97,7 @@
                       <span class="badge badge--success" id="kyc-badge">Cleared</span>
                       <span class="badge badge--info" id="risk-badge">Standard</span>
                       <span class="badge badge--neutral" id="ocr-badge">Manual entry</span>
+                      <span class="badge badge--neutral" id="form-version-badge">Form version</span>
                     </div>
                   </div>
                 </div>
@@ -98,12 +116,42 @@
                   <a class="btn btn--primary" href="./index.html">Issue Invoice</a>
                 </div>
               </div>
+
+              <div class="panel" id="consent-panel">
+                <div class="panel__header">
+                  <h3>Permission records</h3>
+                  <span class="text-small text-muted">Timestamp · user · IP/device · form version</span>
+                </div>
+                <div class="panel__body" id="consent-list"></div>
+              </div>
+
+              <div class="panel" id="audit-panel">
+                <div class="panel__header">
+                  <h3>Audit log</h3>
+                  <span class="text-small text-muted">Consent and access events</span>
+                </div>
+                <div class="table-wrap">
+                  <table class="table audit-table">
+                    <thead>
+                      <tr>
+                        <th>Time</th>
+                        <th>Event</th>
+                        <th>User</th>
+                        <th>IP</th>
+                        <th>Detail</th>
+                      </tr>
+                    </thead>
+                    <tbody id="audit-body"></tbody>
+                  </table>
+                </div>
+              </div>
             </section>
           </div>
         </main>
       </div>
     </div>
 
+    <script src="./js/security.js"></script>
     <script src="./js/customer.js"></script>
   </body>
 </html>

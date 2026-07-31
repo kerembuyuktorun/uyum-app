@@ -17,7 +17,12 @@ const STEPS = [
   {
     id: "consent",
     title: "Consents",
-    fields: ["privacyConsent", "customerDeclaration"],
+    fields: [
+      "privacyNoticeAck",
+      "explicitConsent",
+      "dataRetentionPermission",
+      "customerDeclaration",
+    ],
   },
   {
     id: "confirm",
@@ -35,9 +40,18 @@ const FIELD_LABELS = {
   address: "Address",
   occupation: "Occupation",
   transactionPurpose: "Transaction purpose",
-  privacyConsent: "Privacy consent",
+  privacyNoticeAck: "Privacy notice acknowledged",
+  explicitConsent: "Explicit processing consent",
+  dataRetentionPermission: "Data retention permission",
   customerDeclaration: "Customer declaration",
 };
+
+const CONSENT_FIELDS = [
+  "privacyNoticeAck",
+  "explicitConsent",
+  "dataRetentionPermission",
+  "customerDeclaration",
+];
 
 const MOCK_OCR = {
   nationalId: "12345678901",
@@ -57,7 +71,9 @@ const state = {
     address: "",
     occupation: "",
     transactionPurpose: "",
-    privacyConsent: false,
+    privacyNoticeAck: false,
+    explicitConsent: false,
+    dataRetentionPermission: false,
     customerDeclaration: false,
   },
 };
@@ -116,8 +132,14 @@ function validateField(key) {
     if (!trimmed) return "Transaction purpose is required.";
     return "";
   }
-  if (key === "privacyConsent") {
-    return value ? "" : "Privacy consent is required.";
+  if (key === "privacyNoticeAck") {
+    return value ? "" : "Privacy notice acknowledgment is required.";
+  }
+  if (key === "explicitConsent") {
+    return value ? "" : "Explicit processing consent is required.";
+  }
+  if (key === "dataRetentionPermission") {
+    return value ? "" : "Data retention permission is required.";
   }
   if (key === "customerDeclaration") {
     return value ? "" : "Customer declaration is required.";
@@ -149,7 +171,9 @@ function readInputsIntoState() {
   state.values.address = $("address").value;
   state.values.occupation = $("occupation").value;
   state.values.transactionPurpose = $("transactionPurpose").value;
-  state.values.privacyConsent = $("privacyConsent").checked;
+  state.values.privacyNoticeAck = $("privacyNoticeAck").checked;
+  state.values.explicitConsent = $("explicitConsent").checked;
+  state.values.dataRetentionPermission = $("dataRetentionPermission").checked;
   state.values.customerDeclaration = $("customerDeclaration").checked;
 }
 
@@ -159,7 +183,7 @@ function applyFieldUI(key) {
 
   const control = field.querySelector(".field__control, input[type='checkbox']");
   const errorEl = field.querySelector(".field__error");
-  const isCheckbox = key === "privacyConsent" || key === "customerDeclaration";
+  const isCheckbox = CONSENT_FIELDS.includes(key);
   const error = validateField(key);
   const touched = isCheckbox ? isFilled(key) || field.classList.contains("was-validated") : isFilled(key) || field.classList.contains("was-validated");
 
@@ -240,6 +264,8 @@ function showStepAlert(missing) {
 }
 
 function renderReview() {
+  // Capture-time review shows full values so staff can verify before Confirm.
+  // Stored profile views apply role-based masking via UyumSecurity.
   const rows = Object.keys(FIELD_LABELS)
     .map((key) => {
       let value = state.values[key];
@@ -332,8 +358,10 @@ function runMockOcr() {
 }
 
 function generateCustomerProfile() {
+  const sec = window.UyumSecurity;
   const now = new Date();
   const id = `CUS-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}-${String(now.getHours()).padStart(2, "0")}${String(now.getMinutes()).padStart(2, "0")}`;
+  const actor = sec ? sec.getSessionUser() : { id: "usr-emp-01", name: "Zeynep Arslan", role: "employee" };
   const profile = {
     id,
     createdAt: now.toISOString(),
@@ -348,8 +376,25 @@ function generateCustomerProfile() {
     riskLevel: "Standard",
     store: "Uyum Kuyumculuk — Kadıköy",
     ocrScanned: state.ocrScanned,
+    formVersion: sec ? sec.FORM_VERSION : "kyc-consent-v1.1",
+    capturedBy: actor,
     ...state.values,
   };
+
+  const consentRecords = sec
+    ? sec.recordConsentBundle(id, state.values)
+    : [];
+  profile.consentRecordIds = consentRecords.map((r) => r.id);
+
+  if (sec) {
+    sec.writeAudit({
+      event: "customer.profile_created",
+      customerId: id,
+      consentType: null,
+      detail: "KYC confirmed; customer profile generated with consent bundle",
+    });
+  }
+
   sessionStorage.setItem("uyum.latestCustomer", JSON.stringify(profile));
 
   const existing = JSON.parse(sessionStorage.getItem("uyum.customers") || "[]");
@@ -403,7 +448,7 @@ function bindInputs() {
     });
   });
 
-  ["privacyConsent", "customerDeclaration"].forEach((id) => {
+  CONSENT_FIELDS.forEach((id) => {
     $(id).addEventListener("change", () => {
       document.querySelector(`[data-field="${id}"]`).classList.add("was-validated");
       readInputsIntoState();
@@ -411,6 +456,16 @@ function bindInputs() {
       renderSideChecklist();
     });
   });
+}
+
+function hydrateConsentMeta() {
+  const sec = window.UyumSecurity;
+  if (!sec) return;
+  const user = sec.getSessionUser();
+  const versionEl = $("consent-form-version");
+  const actorEl = $("consent-actor");
+  if (versionEl) versionEl.textContent = `Form ${sec.FORM_VERSION}`;
+  if (actorEl) actorEl.textContent = `Captured by ${user.name} (${user.role})`;
 }
 
 function wireNav() {
@@ -426,6 +481,7 @@ function wireNav() {
 function init() {
   wireNav();
   bindInputs();
+  hydrateConsentMeta();
   $("ocr-scan-btn").addEventListener("click", runMockOcr);
   $("next-btn").addEventListener("click", goNext);
   $("back-btn").addEventListener("click", goBack);

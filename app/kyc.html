@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../design-system/components.css" />
     <link rel="stylesheet" href="./css/dashboard.css" />
     <link rel="stylesheet" href="./css/kyc.css" />
+    <link rel="stylesheet" href="./css/security.css" />
   </head>
   <body>
     <div class="app-shell" id="shell">
@@ -189,20 +190,58 @@
 
                 <section class="panel step-panel" data-step="consent" hidden>
                   <div class="panel__header">
-                    <h3>Privacy consent &amp; declaration</h3>
+                    <h3>Privacy notice &amp; consents</h3>
                     <span class="badge badge--info">Step 4 of 5</span>
                   </div>
                   <div class="panel__body consent-box">
-                    <label class="consent-item field" data-field="privacyConsent" for="privacyConsent">
-                      <input id="privacyConsent" name="privacyConsent" type="checkbox" />
+                    <div class="privacy-notice">
+                      <h4>Privacy notice</h4>
+                      <div class="privacy-notice__body">
+                        Uyum processes identity, contact, occupation, and transaction-purpose data to complete AML/KYC checks,
+                        record payments, issue e-Invoice/e-Archive documents, and retain audit-ready evidence.
+                        Data is stored for compliance retention periods applicable to jewelry dealers, shared only with authorized
+                        staff and legally required authorities, and protected with role-based access controls.
+                        Customers may request access or correction through the store. Full notice version is recorded with each consent.
+                      </div>
+                      <div class="privacy-notice__meta">
+                        <span class="badge badge--neutral" id="consent-form-version">Form version</span>
+                        <span class="badge badge--neutral" id="consent-actor">Captured by</span>
+                      </div>
+                    </div>
+
+                    <label class="consent-item field" data-field="privacyNoticeAck" for="privacyNoticeAck">
+                      <input id="privacyNoticeAck" name="privacyNoticeAck" type="checkbox" />
                       <span>
-                        <strong>Privacy consent <span class="field__status" aria-hidden="true">✓</span></strong>
+                        <strong>Privacy notice acknowledged <span class="field__status" aria-hidden="true">✓</span></strong>
                         <span class="text-secondary text-small">
-                          Customer agrees to processing of identity and contact data for AML/KYC compliance and transaction records.
+                          Customer confirms they have been shown and understand the privacy notice above.
                         </span>
                         <p class="field__error"></p>
                       </span>
                     </label>
+
+                    <label class="consent-item field" data-field="explicitConsent" for="explicitConsent">
+                      <input id="explicitConsent" name="explicitConsent" type="checkbox" />
+                      <span>
+                        <strong>Explicit processing consent <span class="field__status" aria-hidden="true">✓</span></strong>
+                        <span class="text-secondary text-small">
+                          Customer explicitly consents to processing of identity and contact data for AML/KYC compliance and transaction records.
+                        </span>
+                        <p class="field__error"></p>
+                      </span>
+                    </label>
+
+                    <label class="consent-item field" data-field="dataRetentionPermission" for="dataRetentionPermission">
+                      <input id="dataRetentionPermission" name="dataRetentionPermission" type="checkbox" />
+                      <span>
+                        <strong>Data retention permission <span class="field__status" aria-hidden="true">✓</span></strong>
+                        <span class="text-secondary text-small">
+                          Customer permits retention of KYC documents and transaction evidence for statutory audit and compliance periods.
+                        </span>
+                        <p class="field__error"></p>
+                      </span>
+                    </label>
+
                     <label class="consent-item field" data-field="customerDeclaration" for="customerDeclaration">
                       <input id="customerDeclaration" name="customerDeclaration" type="checkbox" />
                       <span>
@@ -242,7 +281,7 @@
                 <div class="panel">
                   <div class="panel__header">
                     <h3>Field status</h3>
-                    <span class="text-small text-muted" id="progress-count">0/10 fields complete</span>
+                    <span class="text-small text-muted" id="progress-count">0/12 fields complete</span>
                   </div>
                   <div class="panel__body">
                     <ul class="checklist" id="field-checklist"></ul>
@@ -262,6 +301,7 @@
       </div>
     </div>
 
+    <script src="./js/security.js"></script>
     <script src="./js/kyc.js"></script>
   </body>
 </html>
