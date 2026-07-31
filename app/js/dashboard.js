@@ -2,10 +2,12 @@ const actionCopy = {
   "new-customer": {
     title: "New Customer",
     body: "Opening customer onboarding form…",
+    href: "./kyc.html",
   },
   "start-kyc": {
     title: "Start KYC Form",
     body: "Starting AML/KYC checklist for the selected or new customer…",
+    href: "./kyc.html",
   },
   "add-payment": {
     title: "Add Payment",
@@ -139,7 +141,12 @@ function renderQuickActions(actions) {
   host.querySelectorAll("[data-action]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const copy = actionCopy[btn.dataset.action];
-      if (copy) showToast(copy.title, copy.body);
+      if (!copy) return;
+      if (copy.href) {
+        window.location.href = copy.href;
+        return;
+      }
+      showToast(copy.title, copy.body);
       window.location.hash = `action-${btn.dataset.action}`;
     });
   });

@@ -4,37 +4,36 @@
 
 Uyum is a web-based SaaS platform for jewelers that combines AML/KYC compliance, customer onboarding, payment tracking, e-Invoice / e-Archive workflows, document archiving, and audit-ready reporting.
 
-## App
+## App screens
 
 | Screen | Path |
 |---|---|
-| **Dashboard (post-login)** | [`app/index.html`](app/index.html) |
-| Dashboard notes | [`docs/dashboard.md`](docs/dashboard.md) |
+| Dashboard (post-login) | [`app/index.html`](app/index.html) |
+| **KYC onboarding** | [`app/kyc.html`](app/kyc.html) |
+| Customer profile | [`app/customer.html`](app/customer.html) |
 
 ### Preview
 
 ```bash
 python3 -m http.server 4173 --directory .
 # Dashboard: http://localhost:4173/app/
-# Design system: http://localhost:4173/design-system/
+# KYC flow:  http://localhost:4173/app/kyc.html
 ```
 
-### Dashboard includes
+### KYC flow (Step 4)
 
-- Live gold/currency **price placeholder**
-- Status cards: daily transactions, missing AML/KYC, payments waiting for invoice, audit-ready files
-- Quick actions: **New Customer**, **Start KYC Form**, **Add Payment**, **Issue Invoice**, **Search Archive**
-- Recent customers table + attention queue (sample data)
+Multi-step ~1 minute counter form:
+
+1. Identity (+ mock OCR)  
+2. Contact & address  
+3. Occupation & purpose  
+4. Privacy consent + customer declaration  
+5. Final confirmation → generated customer profile  
+
+Includes validations, missing-field alerts, and green completion indicators.
+
+Docs: [`docs/kyc-flow.md`](docs/kyc-flow.md) · [`docs/dashboard.md`](docs/dashboard.md) · [`docs/design-system.md`](docs/design-system.md)
 
 ## Design system
 
-| Artifact | Path |
-|---|---|
-| Spec | [`docs/design-system.md`](docs/design-system.md) |
-| Living styleguide | [`design-system/index.html`](design-system/index.html) |
-
-### Visual direction
-
-- **Palette:** navy structure, gold primary actions, charcoal text, light gray surfaces
-- **Type:** Source Serif 4 (brand) + IBM Plex Sans (UI) + IBM Plex Mono (IDs/amounts)
-- **Tone:** trustworthy and efficient — not decorative
+Living styleguide: [`design-system/index.html`](design-system/index.html)
