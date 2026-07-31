@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uyum Design System</title>
+    <link rel="stylesheet" href="tokens.css" />
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="layout.css" />
+    <link rel="stylesheet" href="components.css" />
+  </head>
+  <body>
+    <div class="app-shell" id="shell">
+      <aside class="sidebar" aria-label="Primary">
+        <a class="sidebar__brand" href="#top">
+          <span class="sidebar__brand-name">Uy<span>um</span></span>
+          <span class="sidebar__brand-tag">Design System</span>
+        </a>
+        <nav class="sidebar__nav">
+          <a class="nav-item is-active" href="#palette"><span class="nav-item__icon">●</span><span class="nav-item__label">Palette</span></a>
+          <a class="nav-item" href="#typography"><span class="nav-item__icon">Aa</span><span class="nav-item__label">Typography</span></a>
+          <a class="nav-item" href="#buttons"><span class="nav-item__icon">▢</span><span class="nav-item__label">Buttons</span></a>
+          <a class="nav-item" href="#forms"><span class="nav-item__icon">≡</span><span class="nav-item__label">Forms</span></a>
+          <a class="nav-item" href="#tables"><span class="nav-item__icon">▦</span><span class="nav-item__label">Tables</span></a>
+          <a class="nav-item" href="#transactions"><span class="nav-item__icon">⇄</span><span class="nav-item__label">Transactions</span></a>
+          <a class="nav-item" href="#alerts"><span class="nav-item__icon">!</span><span class="nav-item__label">Alerts</span></a>
+          <a class="nav-item" href="#modals"><span class="nav-item__icon">▣</span><span class="nav-item__label">Modals</span></a>
+          <a class="nav-item" href="#badges"><span class="nav-item__icon">▮</span><span class="nav-item__label">Badges</span></a>
+          <a class="nav-item" href="#archive"><span class="nav-item__icon">⧉</span><span class="nav-item__label">Archive</span></a>
+          <a class="nav-item" href="#dashboard"><span class="nav-item__icon">▣</span><span class="nav-item__label">Dashboard</span></a>
+        </nav>
+      </aside>
+
+      <div class="main">
+        <header class="topbar">
+          <div class="topbar__meta">
+            <span class="topbar__eyebrow">Uyum · Step 2</span>
+            <h1 id="top">Design System & Interface Language</h1>
+          </div>
+          <div class="page-header__actions">
+            <button class="btn btn--secondary" type="button" id="navToggle">Menu</button>
+            <button class="btn btn--primary" type="button">Generate Report</button>
+          </div>
+        </header>
+
+        <main class="canvas">
+          <div class="canvas__inner">
+            <section class="section-block" id="palette">
+              <div class="page-header">
+                <div class="page-header__copy">
+                  <h2>Color palette</h2>
+                  <p class="text-secondary">
+                    Navy for structure, gold for primary action and brand accent, charcoal for text, light gray for surfaces.
+                    Trustworthy and efficient — not decorative.
+                  </p>
+                </div>
+              </div>
+              <div class="swatch-grid">
+                <div class="swatch"><div class="swatch__chip" style="background:#0A1628"></div><div class="swatch__meta"><strong>Navy 950</strong><span class="text-small text-muted">#0A1628 · shell</span></div></div>
+                <div class="swatch"><div class="swatch__chip" style="background:#12233D"></div><div class="swatch__meta"><strong>Navy 900</strong><span class="text-small text-muted">#12233D · brand</span></div></div>
+                <div class="swatch"><div class="swatch__chip" style="background:#A8843A"></div><div class="swatch__meta"><strong>Gold 600</strong><span class="text-small text-muted">#A8843A · primary CTA</span></div></div>
+                <div class="swatch"><div class="swatch__chip" style="background:#C49A45"></div><div class="swatch__meta"><strong>Gold 500</strong><span class="text-small text-muted">#C49A45 · hover</span></div></div>
+                <div class="swatch"><div class="swatch__chip" style="background:#1C2128"></div><div class="swatch__meta"><strong>Charcoal 900</strong><span class="text-small text-muted">#1C2128 · text</span></div></div>
+                <div class="swatch"><div class="swatch__chip" style="background:#3D4654"></div><div class="swatch__meta"><strong>Charcoal 700</strong><span class="text-small text-muted">#3D4654 · secondary</span></div></div>
+                <div class="swatch"><div class="swatch__chip" style="background:#F5F6F8;border-bottom:1px solid #D7DBE2"></div><div class="swatch__meta"><strong>Gray 50</strong><span class="text-small text-muted">#F5F6F8 · canvas</span></div></div>
+                <div class="swatch"><div class="swatch__chip" style="background:#EBEDF0;border-bottom:1px solid #D7DBE2"></div><div class="swatch__meta"><strong>Gray 100</strong><span class="text-small text-muted">#EBEDF0 · panels</span></div></div>
+                <div class="swatch"><div class="swatch__chip" style="background:#E5F4EC"></div><div class="swatch__meta"><strong>Success</strong><span class="text-small text-muted">#1F6B45 on #E5F4EC</span></div></div>
+                <div class="swatch"><div class="swatch__chip" style="background:#F8EFDC"></div><div class="swatch__meta"><strong>Warning</strong><span class="text-small text-muted">#8A5A12 on #F8EFDC</span></div></div>
+                <div class="swatch"><div class="swatch__chip" style="background:#F8E8E8"></div><div class="swatch__meta"><strong>Danger</strong><span class="text-small text-muted">#9B2C2C on #F8E8E8</span></div></div>
+                <div class="swatch"><div class="swatch__chip" style="background:#E7F0F8"></div><div class="swatch__meta"><strong>Info</strong><span class="text-small text-muted">#1A4A7A on #E7F0F8</span></div></div>
+              </div>
+            </section>
+
+            <section class="section-block" id="typography">
+              <h2>Typography</h2>
+              <div class="panel">
+                <div class="panel__body type-specimen">
+                  <div class="type-row">
+                    <span class="text-small text-muted">Brand / Source Serif 4</span>
+                    <p class="brand-mark" style="font-size:2rem;line-height:1.2">Uy<span class="brand-mark__accent">um</span> — compliance at the counter</p>
+                  </div>
+                  <div class="type-row">
+                    <span class="text-small text-muted">H1 / 24</span>
+                    <h1>Customer onboarding</h1>
+                  </div>
+                  <div class="type-row">
+                    <span class="text-small text-muted">H2 / 18</span>
+                    <h2>Payment & invoice summary</h2>
+                  </div>
+                  <div class="type-row">
+                    <span class="text-small text-muted">Body / 14</span>
+                    <p>IBM Plex Sans for UI. Clear hierarchy for store staff, accountants, and audit prep — dense enough for ops, readable on tablets.</p>
+                  </div>
+                  <div class="type-row">
+                    <span class="text-small text-muted">Mono / amounts</span>
+                    <p class="mono">TRY 248,500.00 · INV-2026-01482 · KYC-88421</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="section-block" id="buttons">
+              <h2>Buttons</h2>
+              <p class="text-secondary">Verb-led labels. One gold primary action per view.</p>
+              <div class="panel">
+                <div class="panel__body" style="display:flex;flex-wrap:wrap;gap:0.75rem">
+                  <button class="btn btn--primary" type="button">Save</button>
+                  <button class="btn btn--primary" type="button">Confirm</button>
+                  <button class="btn btn--primary" type="button">Issue Invoice</button>
+                  <button class="btn btn--secondary" type="button">Download Document</button>
+                  <button class="btn btn--secondary" type="button">Generate Report</button>
+                  <button class="btn btn--ghost" type="button">Cancel</button>
+                  <button class="btn btn--danger" type="button">Block Customer</button>
+                  <button class="btn btn--primary" type="button" disabled>Save</button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section-block" id="forms">
+              <h2>Forms</h2>
+              <div class="panel">
+                <div class="panel__header">
+                  <h3>Customer onboarding</h3>
+                  <span class="badge badge--info">Draft</span>
+                </div>
+                <div class="panel__body">
+                  <form class="form-layout form-layout--wide" action="#" onsubmit="return false">
+                    <div class="form-row">
+                      <div class="field">
+                        <label class="field__label" for="fullName">Full name <span class="field__required">(required)</span></label>
+                        <input class="field__control" id="fullName" name="fullName" value="Ayşe Yılmaz" />
+                      </div>
+                      <div class="field">
+                        <label class="field__label" for="nationalId">National ID</label>
+                        <input class="field__control mono" id="nationalId" name="nationalId" value="12345678901" />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="field">
+                        <label class="field__label" for="phone">Phone</label>
+                        <input class="field__control" id="phone" name="phone" value="+90 532 000 00 00" />
+                      </div>
+                      <div class="field">
+                        <label class="field__label" for="purchase">Expected purchase (TRY)</label>
+                        <input class="field__control mono" id="purchase" name="purchase" value="185000" />
+                        <p class="field__hint">Threshold rules may open enhanced KYC.</p>
+                      </div>
+                    </div>
+                    <div class="field is-invalid">
+                      <label class="field__label" for="idDoc">ID document reference</label>
+                      <input class="field__control" id="idDoc" name="idDoc" />
+                      <p class="field__error">Upload or enter an ID document reference before clearing KYC.</p>
+                    </div>
+                    <div class="field">
+                      <label class="field__label" for="notes">Case notes</label>
+                      <textarea class="field__control" id="notes" name="notes">Walk-in purchase. Cash + card split expected.</textarea>
+                    </div>
+                  </form>
+                </div>
+                <div class="panel__footer">
+                  <button class="btn btn--ghost" type="button">Cancel</button>
+                  <button class="btn btn--primary" type="button">Save</button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section-block" id="tables">
+              <h2>Tables</h2>
+              <div class="panel">
+                <div class="panel__header">
+                  <h3>Invoice queue</h3>
+                  <button class="btn btn--primary btn--sm" type="button">Issue Invoice</button>
+                </div>
+                <div class="table-wrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th class="sticky-col">Customer</th>
+                        <th>Invoice</th>
+                        <th>Type</th>
+                        <th class="num">Amount</th>
+                        <th>Status</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="sticky-col">Ayşe Yılmaz</td>
+                        <td class="mono">INV-2026-01482</td>
+                        <td>e-Invoice</td>
+                        <td class="num">248,500.00</td>
+                        <td><span class="badge badge--warning">Queued</span></td>
+                        <td><button class="btn btn--ghost btn--sm" type="button">Retry Submission</button></td>
+                      </tr>
+                      <tr>
+                        <td class="sticky-col">Golden Gate Ltd.</td>
+                        <td class="mono">INV-2026-01471</td>
+                        <td>e-Archive</td>
+                        <td class="num">92,150.00</td>
+                        <td><span class="badge badge--success">Accepted</span></td>
+                        <td><button class="btn btn--ghost btn--sm" type="button">Download Document</button></td>
+                      </tr>
+                      <tr>
+                        <td class="sticky-col">Mehmet Kaya</td>
+                        <td class="mono">INV-2026-01460</td>
+                        <td>e-Invoice</td>
+                        <td class="num">41,000.00</td>
+                        <td><span class="badge badge--danger">Rejected</span></td>
+                        <td><button class="btn btn--ghost btn--sm" type="button">Retry Submission</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+
+            <section class="section-block" id="transactions">
+              <h2>Transaction cards</h2>
+              <div class="txn-list">
+                <article class="txn-card">
+                  <div class="txn-card__top">
+                    <div>
+                      <div class="txn-card__title">Payment received</div>
+                      <div class="txn-card__amount">TRY 248,500.00</div>
+                    </div>
+                    <span class="badge badge--success">Paid</span>
+                  </div>
+                  <div class="txn-card__meta">
+                    <span>31 Jul 2026</span>
+                    <span>Card + cash</span>
+                    <span class="mono">PAY-88341</span>
+                  </div>
+                  <div class="txn-card__actions">
+                    <button class="btn btn--secondary btn--sm" type="button">Issue Invoice</button>
+                    <button class="btn btn--ghost btn--sm" type="button">Download Document</button>
+                  </div>
+                </article>
+                <article class="txn-card">
+                  <div class="txn-card__top">
+                    <div>
+                      <div class="txn-card__title">e-Archive draft</div>
+                      <div class="txn-card__amount">TRY 18,750.00</div>
+                    </div>
+                    <span class="badge badge--neutral">Draft</span>
+                  </div>
+                  <div class="txn-card__meta">
+                    <span>30 Jul 2026</span>
+                    <span>Bank transfer</span>
+                    <span class="mono">PAY-88290</span>
+                  </div>
+                  <div class="txn-card__actions">
+                    <button class="btn btn--primary btn--sm" type="button">Confirm</button>
+                    <button class="btn btn--ghost btn--sm" type="button">Cancel</button>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="section-block" id="alerts">
+              <h2>Alerts</h2>
+              <div class="stack">
+                <div class="alert alert--info">
+                  <div class="alert__icon">i</div>
+                  <div>
+                    <div class="alert__title">KYC in progress</div>
+                    <div class="alert__body">Identity documents received. Awaiting risk review before sale can complete.</div>
+                  </div>
+                </div>
+                <div class="alert alert--warning">
+                  <div class="alert__icon">!</div>
+                  <div>
+                    <div class="alert__title">Threshold exceeded</div>
+                    <div class="alert__body">Purchase amount requires enhanced due diligence. Open a compliance case before issuing an invoice.</div>
+                  </div>
+                  <div class="alert__actions">
+                    <button class="btn btn--secondary btn--sm" type="button">Open Case</button>
+                  </div>
+                </div>
+                <div class="alert alert--success">
+                  <div class="alert__icon">✓</div>
+                  <div>
+                    <div class="alert__title">Invoice accepted</div>
+                    <div class="alert__body">e-Invoice INV-2026-01471 accepted and archived automatically.</div>
+                  </div>
+                </div>
+                <div class="alert alert--danger">
+                  <div class="alert__icon">×</div>
+                  <div>
+                    <div class="alert__title">Submission failed</div>
+                    <div class="alert__body">Tax ID mismatch. Fix customer tax details, then retry submission.</div>
+                  </div>
+                  <div class="alert__actions">
+                    <button class="btn btn--danger btn--sm" type="button">Retry Submission</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="section-block demo-modal-inline" id="modals">
+              <h2>Confirmation modal</h2>
+              <div class="modal-backdrop" aria-hidden="false">
+                <div class="modal" role="dialog" aria-labelledby="modal-title">
+                  <div class="modal__header">
+                    <h3 id="modal-title">Issue invoice for Ayşe Yılmaz?</h3>
+                  </div>
+                  <div class="modal__body">
+                    <p>This will submit e-Invoice <span class="mono">INV-2026-01482</span> for <strong class="mono">TRY 248,500.00</strong> and attach it to the customer archive.</p>
+                  </div>
+                  <div class="modal__footer">
+                    <button class="btn btn--ghost" type="button">Cancel</button>
+                    <button class="btn btn--primary" type="button">Issue Invoice</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="section-block" id="badges">
+              <h2>Status badges</h2>
+              <div class="panel">
+                <div class="panel__body" style="display:flex;flex-wrap:wrap;gap:0.5rem">
+                  <span class="badge badge--success">Cleared</span>
+                  <span class="badge badge--success">Paid</span>
+                  <span class="badge badge--success">Accepted</span>
+                  <span class="badge badge--success">Archived</span>
+                  <span class="badge badge--warning">In review</span>
+                  <span class="badge badge--warning">Queued</span>
+                  <span class="badge badge--warning">Pending</span>
+                  <span class="badge badge--danger">Rejected</span>
+                  <span class="badge badge--danger">Blocked</span>
+                  <span class="badge badge--danger">Failed</span>
+                  <span class="badge badge--info">In progress</span>
+                  <span class="badge badge--neutral">Draft</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="section-block" id="archive">
+              <h2>Document archive</h2>
+              <div class="panel">
+                <div class="panel__header">
+                  <h3>Archive browser</h3>
+                  <button class="btn btn--secondary btn--sm" type="button">Upload Document</button>
+                </div>
+                <div class="panel__body stack">
+                  <div class="archive-toolbar">
+                    <div class="archive-filters">
+                      <div class="field">
+                        <label class="field__label" for="docType">Type</label>
+                        <select class="field__control" id="docType">
+                          <option>All types</option>
+                          <option>KYC ID</option>
+                          <option>Invoice PDF</option>
+                          <option>Payment proof</option>
+                        </select>
+                      </div>
+                      <div class="field">
+                        <label class="field__label" for="docCustomer">Customer</label>
+                        <input class="field__control" id="docCustomer" placeholder="Search customer" />
+                      </div>
+                    </div>
+                    <button class="btn btn--primary" type="button">Download Document</button>
+                  </div>
+
+                  <div class="archive-list">
+                    <div class="archive-row">
+                      <div>
+                        <div class="archive-row__name">ayse-yilmaz-id.pdf</div>
+                        <div class="archive-row__meta">Linked to KYC-88421</div>
+                      </div>
+                      <div><span class="badge badge--neutral">KYC ID</span></div>
+                      <div class="text-secondary">Ayşe Yılmaz</div>
+                      <div class="text-small text-muted">31 Jul 2026</div>
+                      <button class="btn btn--ghost btn--sm" type="button">Download Document</button>
+                    </div>
+                    <div class="archive-row">
+                      <div>
+                        <div class="archive-row__name">INV-2026-01471.pdf</div>
+                        <div class="archive-row__meta">e-Archive accepted</div>
+                      </div>
+                      <div><span class="badge badge--success">Invoice</span></div>
+                      <div class="text-secondary">Golden Gate Ltd.</div>
+                      <div class="text-small text-muted">29 Jul 2026</div>
+                      <button class="btn btn--ghost btn--sm" type="button">Download Document</button>
+                    </div>
+                  </div>
+
+                  <h3>Grid mode</h3>
+                  <div class="archive-grid">
+                    <article class="archive-tile">
+                      <div class="archive-tile__preview">PDF</div>
+                      <div class="archive-tile__name">payment-proof-88341.pdf</div>
+                      <div class="text-small text-muted">31 Jul 2026</div>
+                      <button class="btn btn--secondary btn--sm" type="button">Download Document</button>
+                    </article>
+                    <article class="archive-tile">
+                      <div class="archive-tile__preview">XML</div>
+                      <div class="archive-tile__name">INV-2026-01482.xml</div>
+                      <div class="text-small text-muted">31 Jul 2026</div>
+                      <button class="btn btn--secondary btn--sm" type="button">Download Document</button>
+                    </article>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="section-block" id="dashboard">
+              <h2>Dashboard panels</h2>
+              <div class="grid-12">
+                <div class="panel col-4">
+                  <div class="panel__header"><h3>Open KYC cases</h3></div>
+                  <div class="panel__body">
+                    <div class="metric">
+                      <div class="metric__value">7</div>
+                      <div class="metric__label">Needs attention today</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel col-4">
+                  <div class="panel__header"><h3>Invoice exceptions</h3></div>
+                  <div class="panel__body">
+                    <div class="metric">
+                      <div class="metric__value">3</div>
+                      <div class="metric__label">Rejected or failed</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel col-4">
+                  <div class="panel__header"><h3>Audit readiness</h3></div>
+                  <div class="panel__body">
+                    <div class="metric">
+                      <div class="metric__value">92%</div>
+                      <div class="metric__label">Documents linked</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel col-8">
+                  <div class="panel__header">
+                    <h3>Attention queue</h3>
+                    <a href="#tables">View all</a>
+                  </div>
+                  <div class="panel__body">
+                    <ul class="attention-list">
+                      <li><a href="#forms">Ayşe Yılmaz — enhanced KYC</a><span class="badge badge--warning">In review</span></li>
+                      <li><a href="#tables">INV-2026-01460 — tax ID mismatch</a><span class="badge badge--danger">Rejected</span></li>
+                      <li><a href="#transactions">PAY-88290 — invoice not issued</a><span class="badge badge--neutral">Draft</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="panel col-4">
+                  <div class="panel__header"><h3>Reports</h3></div>
+                  <div class="panel__body empty-state" style="padding:1rem 0">
+                    <div class="empty-state__title">Build an audit pack</div>
+                    <p class="empty-state__body">Export KYC, payments, invoices, and documents for a date range.</p>
+                    <button class="btn btn--primary" type="button">Generate Report</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="section-block">
+              <h2>Layout & responsive rules</h2>
+              <div class="panel">
+                <div class="panel__body stack-sm text-secondary">
+                  <p><strong>Desktop (≥1120px):</strong> 240px navy sidebar, 12-column dashboard, full tables.</p>
+                  <p><strong>Tablet (768–1119px):</strong> icon rail sidebar, stacked dashboard columns, horizontal table scroll with sticky first column.</p>
+                  <p><strong>Mobile (&lt;768px):</strong> drawer navigation, stacked panels, full-width primary actions, modal bottom sheet.</p>
+                  <p>Touch targets for sales actions stay at least 40–44px. Motion is limited to sidebar, modal enter, and status tint updates.</p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      const shell = document.getElementById("shell");
+      const toggle = document.getElementById("navToggle");
+      toggle.addEventListener("click", () => {
+        shell.classList.toggle("nav-open");
+      });
+
+      document.querySelectorAll(".nav-item").forEach((item) => {
+        item.addEventListener("click", () => {
+          document.querySelectorAll(".nav-item").forEach((n) => n.classList.remove("is-active"));
+          item.classList.add("is-active");
+          shell.classList.remove("nav-open");
+        });
+      });
+    </script>
+  </body>
+</html>
