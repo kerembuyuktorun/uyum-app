@@ -14,8 +14,10 @@ A counter-ready AML/KYC form that can be completed in about one minute when a cu
 1. **Identity** — national ID, full name, birth date + mock OCR scan  
 2. **Contact & address** — phone, email, address  
 3. **Occupation & purpose** — occupation, transaction purpose  
-4. **Consents** — privacy consent, customer declaration  
-5. **Confirm** — review all fields, then generate profile  
+4. **Consents** — privacy notice, explicit consent, data retention permission, customer declaration  
+5. **Confirm** — review all fields, then generate profile (+ permission records)  
+
+See also [`privacy-security.md`](privacy-security.md) for masking and audit fields.
 
 ## Validation & status
 
